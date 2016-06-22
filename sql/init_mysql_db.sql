@@ -4,20 +4,8 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema mode
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema mode
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `mode_bi` DEFAULT CHARACTER SET utf8mb4 ;
--- -----------------------------------------------------
--- Schema new_schema1
--- -----------------------------------------------------
+
 USE `mode_bi` ;
 
 -- -----------------------------------------------------
@@ -48,14 +36,14 @@ DROP TABLE IF EXISTS `mode_bi`.`md_stats_daily` ;
 
 CREATE TABLE IF NOT EXISTS `mode_bi`.`md_stats_daily` (
   `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `date` INT(6) NULL DEFAULT NULL COMMENT 'Date: 20160601, 20160602...',
-  `new_reg` INT(10) NULL DEFAULT NULL COMMENT 'Daily new registration users',
-  `new_reg_fb` INT(10) NULL DEFAULT NULL COMMENT 'Daily new facebook registration users',
-  `new_reg_yt` INT(10) NULL DEFAULT NULL COMMENT 'Daily new youtube registration users',
-  `total_reg` INT(10) NULL DEFAULT NULL COMMENT 'Total registration users',
-  `actives` INT(10) NULL DEFAULT NULL COMMENT 'Daily active users',
-  `orders` INT(10) NULL DEFAULT NULL COMMENT 'Daily order count',
-  `total_orders` INT(10) NULL DEFAULT NULL COMMENT 'Total order count',
+  `date` INT(6) NULL DEFAULT NULL COMMENT 'Daily date: 20160601, 20160602...',
+  `new_user` INT(10) NULL DEFAULT NULL COMMENT 'Daily new users',
+  `new_user_fb` INT(10) NULL DEFAULT NULL COMMENT 'Daily new facebook registration users',
+  `new_user_yt` INT(10) NULL DEFAULT NULL COMMENT 'Daily new youtube registration users',
+  `total_user` INT(10) NULL DEFAULT NULL COMMENT 'Total registration users',
+  `active_user` INT(10) NULL DEFAULT NULL COMMENT 'Daily active users',
+  `order` INT(10) NULL DEFAULT NULL COMMENT 'Daily order count',
+  `total_order` INT(10) NULL DEFAULT NULL COMMENT 'Total order count',
   `gmv` FLOAT NULL DEFAULT NULL COMMENT 'Daily GMV',
   `total_gmv` FLOAT NULL DEFAULT NULL COMMENT 'Total GMV',
   PRIMARY KEY (`id`),
@@ -64,6 +52,36 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4;
 
+-- -----------------------------------------------------
+-- Table `mode_bi`.`md_stats_weekly`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mode_bi`.`md_stats_weekly` ;
+
+CREATE TABLE IF NOT EXISTS `mode_bi`.`md_stats_weekly` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `date` INT(6) NULL DEFAULT NULL COMMENT 'Weekly date: 20160605, 201606012...',
+  `active_user` INT(10) NULL DEFAULT NULL COMMENT 'Weekly active users',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `date_idx` (`date` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `mode_bi`.`md_stats_monthly`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mode_bi`.`md_stats_monthly` ;
+
+CREATE TABLE IF NOT EXISTS `mode_bi`.`md_stats_monthly` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `date` INT(6) NULL DEFAULT NULL COMMENT 'Monthly date: 201605, 201606...',
+  `active_user` INT(10) NULL DEFAULT NULL COMMENT 'Monthly active users',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `date_idx` (`date` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -23,9 +23,9 @@ public interface StatsDailyDao {
      * @param statsDaily
      * @return
      */
-    @Insert("INSERT INTO md_stats_daily (date, new_reg, new_reg_fb, new_reg_yt, total_reg, " +
+    @Insert("INSERT INTO md_stats_daily (date, new_user, new_user_fb, new_user_yt, total_user, " +
             "actives, orders, total_orders, gmv, total_gmv) " +
-            "VALUES (#{date}, #{newReg}, #{newRegFb}, #{newRegYt}, #{totalReg}, " +
+            "VALUES (#{date}, #{newUser}, #{newUserFb}, #{newUserYt}, #{totalUser}, " +
             "#{actives}, #{orders}, #{totalOrders}, #{gmv}, #{totalGmv})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
@@ -41,10 +41,10 @@ public interface StatsDailyDao {
     @Update({"<script>",
             "UPDATE md_stats_daily ",
             "<set>",
-            "<if test='newReg != null'> new_reg = #{newReg}, </if>",
-            "<if test='newRegFb != null'> new_reg_fb = #{newRegFb}, </if>",
-            "<if test='newRegYt != null'> new_reg_yt = #{newRegYt}, </if>",
-            "<if test='totalReg != null'> total_reg = #{totalReg}, </if>",
+            "<if test='newUser != null'> new_user = #{newUser}, </if>",
+            "<if test='newUserFb != null'> new_user_fb = #{newUserFb}, </if>",
+            "<if test='newUserYt != null'> new_user_yt = #{newUserYt}, </if>",
+            "<if test='totalUser != null'> total_user = #{totalUser}, </if>",
             "<if test='actives != null'> actives = #{actives}, </if>",
             "<if test='orders != null'> orders = #{orders}, </if>",
             "<if test='totalOrders != null'> total_orders = #{totalOrders}, </if>",
@@ -70,10 +70,10 @@ public interface StatsDailyDao {
             "<when test='date != null'> date = #{date} </when>",
             "<otherwise>",
             "<if test='id != null'> AND id = #{id} </if>",
-            "<if test='newReg != null'> AND new_reg = #{newReg} </if>",
-            "<if test='newRegFb != null'> AND new_reg_fb = #{newRegFb} </if>",
-            "<if test='newRegYt != null'> AND new_reg_yt = #{newRegYt} </if>",
-            "<if test='totalReg != null'> AND total_reg = #{totalReg} </if>",
+            "<if test='newUser != null'> AND new_user = #{newUser} </if>",
+            "<if test='newUserFb != null'> AND new_user_fb = #{newUserFb} </if>",
+            "<if test='newUserYt != null'> AND new_user_yt = #{newUserYt} </if>",
+            "<if test='totalUser != null'> AND total_user = #{totalUser} </if>",
             "<if test='actives != null'> AND actives = #{actives} </if>",
             "<if test='orders != null'> AND orders = #{orders} </if>",
             "<if test='totalOrders != null'> AND total_orders = #{totalOrders} </if>",
@@ -87,10 +87,10 @@ public interface StatsDailyDao {
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "date", column = "date"),
-            @Result(property = "newReg", column = "new_reg"),
-            @Result(property = "newRegFb", column = "new_reg_fb"),
-            @Result(property = "newRegYt", column = "new_reg_yt"),
-            @Result(property = "totalReg", column = "total_reg"),
+            @Result(property = "newUser", column = "new_user"),
+            @Result(property = "newUserFb", column = "new_user_fb"),
+            @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "totalUser", column = "total_user"),
             @Result(property = "actives", column = "actives"),
             @Result(property = "orders", column = "orders"),
             @Result(property = "totalOrders", column = "total_orders"),
@@ -124,10 +124,10 @@ public interface StatsDailyDao {
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "date", column = "date"),
-            @Result(property = "newReg", column = "new_reg"),
-            @Result(property = "newRegFb", column = "new_reg_fb"),
-            @Result(property = "newRegYt", column = "new_reg_yt"),
-            @Result(property = "totalReg", column = "total_reg"),
+            @Result(property = "newUser", column = "new_user"),
+            @Result(property = "newUserFb", column = "new_user_fb"),
+            @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "totalUser", column = "total_user"),
             @Result(property = "actives", column = "actives"),
             @Result(property = "orders", column = "orders"),
             @Result(property = "totalOrders", column = "total_orders"),
@@ -149,7 +149,7 @@ public interface StatsDailyDao {
             "</where>",
             "</script>"
     })
-    public Integer getLastestDate(String columnName);
+    public Integer getLastProcessedDate(String columnName);
 
 
     @Select({
@@ -161,7 +161,8 @@ public interface StatsDailyDao {
             "</where>",
             "</script>"
     })
-    public List<Integer> getToBeProcessedDate(String columnName, Integer endDate);
+    public List<Integer> getToBeProcessedDate(@Param("columnName") String columnName,
+                                              @Param("endDate") Integer endDate);
 
 
 }

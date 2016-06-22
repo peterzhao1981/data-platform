@@ -42,4 +42,21 @@ public interface CalendarDao {
     public List<Calendar> listCalendars(@Param("startDate") Integer startDate,
                                         @Param("endDate") Integer endDate);
 
+    @Select({
+            "<script>",
+            "SELECT * FROM md_calendar ",
+            "where date = #{date}",
+            "</script>"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "date", column = "date"),
+            @Result(property = "weekend", column = "weekend"),
+            @Result(property = "month", column = "month"),
+            @Result(property = "quarter", column = "quarter"),
+            @Result(property = "year", column = "year"),
+            @Result(property = "startTs", column = "start_ts"),
+            @Result(property = "endTs", column = "end_ts")})
+    public Calendar getCalendar(Integer date);
+
 }
