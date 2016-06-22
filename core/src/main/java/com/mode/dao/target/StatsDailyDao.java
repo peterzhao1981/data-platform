@@ -140,7 +140,12 @@ public interface StatsDailyDao {
                                             @Param("offset") Integer offset);
 
 
-
+    /**
+     * Get last processed date.
+     *
+     * @param columnName
+     * @return
+     */
     @Select({
             "<script>",
             "SELECT max(date) FROM md_stats_daily ",
@@ -152,6 +157,13 @@ public interface StatsDailyDao {
     public Integer getLastProcessedDate(String columnName);
 
 
+    /**
+     * List to be processed dates.
+     *
+     * @param columnName
+     * @param endDate
+     * @return
+     */
     @Select({
             "<script>",
             "SELECT date FROM md_stats_daily ",

@@ -11,8 +11,12 @@ import com.mode.base.AppConfig;
 import com.mode.dao.source.UserDao;
 import com.mode.dao.target.CalendarDao;
 import com.mode.dao.target.StatsDailyDao;
+import com.mode.dao.target.StatsMonthlyDao;
+import com.mode.dao.target.StatsWeeklyDao;
 import com.mode.entity.Calendar;
 import com.mode.entity.StatsDaily;
+import com.mode.entity.StatsMonthly;
+import com.mode.entity.StatsWeekly;
 import com.mode.service.BiDailyProcessingService;
 
 /**
@@ -28,25 +32,31 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
     private StatsDailyDao statsDailyDao;
 
     @Autowired
+    private StatsWeeklyDao statsWeeklyDao;
+
+    @Autowired
+    private StatsMonthlyDao statsMonthlyDao;
+
+    @Autowired
     private CalendarDao calendarDao;
 
-    private final String STATS_DAILY_NEW_USER_COL_NAME = "new_user";
+    private final String STATS_NEW_USER_COL_NAME = "new_user";
 
-    private final String STATS_DAILY_NEW_USER_FB_COL_NAME = "new_user_fb";
+    private final String STATS_NEW_USER_FB_COL_NAME = "new_user_fb";
 
-    private final String STATS_DAILY_NEW_USER_YT_COL_NAME = "new_user_yt";
+    private final String STATS_NEW_USER_YT_COL_NAME = "new_user_yt";
 
-    private final String STATS_DAILY_TOTAL_USER_COL_NAME = "total_user";
+    private final String STATS_TOTAL_USER_COL_NAME = "total_user";
 
-    private final String STATS_DAILY_ACTIVE_USER_COL_NAME = "active_user";
+    private final String STATS_ACTIVE_USER_COL_NAME = "active_user";
 
-    private final String STATS_DAILY_ORDER_COL_NAME = "order";
+    private final String STATS_ORDER_COL_NAME = "order";
 
-    private final String STATS_DAILY_TOTAL_ORDER_COL_NAME = "total_order";
+    private final String STATS_TOTAL_ORDER_COL_NAME = "total_order";
 
-    private final String STATS_DAILY_GMV_COL_NAME = "gmv";
+    private final String STATS_GMV_COL_NAME = "gmv";
 
-    private final String STATS_DAILY_TOTAL_GMV_COL_NAME = "total_gmv";
+    private final String STATS_TOTAL_GMV_COL_NAME = "total_gmv";
 
     @Override
     public void process() {
@@ -56,9 +66,20 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
         // Process endDate is yesterday
         Integer endDate = Integer.parseInt(df.format(now));
 
+        processDailyStats(endDate);
+        processWeeklyStats(endDate);
+        processMonthlyStats(endDate);
+    }
+
+    /**
+     * Process daily stats.
+     *
+     * @param endDate
+     */
+    private void processDailyStats(Integer endDate) {
         Integer lastProcessedDate = statsDailyDao.getLastProcessedDate(null);
         if (lastProcessedDate == null) {
-            lastProcessedDate = AppConfig.LAST_PROCESSED_DATE;
+            lastProcessedDate = AppConfig.LAST_PROCESSED_DAILY_DATE;
         }
         // Get all dates from lastestDate to endDate
         List<Calendar> calendars = calendarDao.listCalendars(lastProcessedDate, endDate);
@@ -68,10 +89,51 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
             statsDailyDao.createStatsDaily(statsDaily);
         }
         processNewUser(endDate);
+        processOrder(endDate);
+        processGmv(endDate);
+        processActiveUser(endDate, AppConfig.STATS_TYPE_DAILY);
+    }
 
+    /**
+     * Process weekly stats.
+     *
+     * @param endDate
+     */
+    private void processWeeklyStats(Integer endDate) {
+        Integer lastProcessedDate = statsWeeklyDao.getLastProcessedDate(null);
+        if (lastProcessedDate == null) {
+            lastProcessedDate = AppConfig.LAST_PROCESSED_WEEKLY_DATE;
+        }
+        Integer endWeekend = calendarDao.getCalendar(endDate).getWeekend();
+        // Get all weekends from lastProcssedDate to endDate
+        List<Integer> weekends = calendarDao.listWeekends(lastProcessedDate, endWeekend);
+        for (Integer weekend : weekends) {
+            StatsWeekly statsWeekly = new StatsWeekly();
+            statsWeekly.setDate(weekend);
+            statsWeeklyDao.createStatsWeekly(statsWeekly);
+        }
+        processActiveUser(endWeekend, AppConfig.STATS_TYPE_WEEKLY);
+    }
 
-
-
+    /**
+     * Process monthly stats.
+     *
+     * @param endDate
+     */
+    private void processMonthlyStats(Integer endDate) {
+        Integer lastProcessedDate = statsMonthlyDao.getLastProcessedDate(null);
+        if (lastProcessedDate == null) {
+            lastProcessedDate = AppConfig.LAST_PROCESSED_MONTHLY_DATE;
+        }
+        Integer endMonth = calendarDao.getCalendar(endDate).getMonth();
+        // Get all months from lastProcessedDate to endDate
+        List<Integer> months = calendarDao.listMonths(lastProcessedDate, endMonth);
+        for (Integer month : months) {
+            StatsMonthly statsMonthly = new StatsMonthly();
+            statsMonthly.setDate(month);
+            statsMonthlyDao.createStatsMontyly(statsMonthly);
+        }
+        processActiveUser(endMonth, AppConfig.STATS_TYPE_MONTHLY);
     }
 
 
@@ -82,7 +144,7 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
      * @param endDate
      */
     private void processNewUser(Integer endDate) {
-        List<Integer> dates = statsDailyDao.listToBeProcessedDates(STATS_DAILY_NEW_USER_COL_NAME,
+        List<Integer> dates = statsDailyDao.listToBeProcessedDates(STATS_NEW_USER_COL_NAME,
                 endDate);
         for (Integer date : dates) {
 //            System.out.println(date);
@@ -126,15 +188,30 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
      *
      * @param endDate
      */
-    private void processActiveUser(Integer endDate) {
-        // Process DAU
-        List<Integer> dates = statsDailyDao.listToBeProcessedDates(STATS_DAILY_ACTIVE_USER_COL_NAME,
-                endDate);
-        for (Integer date : dates) {
+    private void processActiveUser(Integer endDate, String type) {
+        if (AppConfig.STATS_TYPE_DAILY.equalsIgnoreCase(type)) {
+            // Process DAU
+            List<Integer> dates = statsDailyDao.listToBeProcessedDates
+                    (STATS_ACTIVE_USER_COL_NAME, endDate);
+            for (Integer date : dates) {
+                System.out.println(date);
+            }
+        } else if (AppConfig.STATS_TYPE_WEEKLY.equalsIgnoreCase(type)) {
+            // Process WAU
+            List<Integer> weekends = statsWeeklyDao.listToBeProcessedDates
+                    (STATS_ACTIVE_USER_COL_NAME, endDate);
+            for (Integer weekend : weekends) {
+                System.out.println(weekend);
+            }
+        } else if (AppConfig.STATS_TYPE_MONTHLY.equalsIgnoreCase(type)) {
+            // Process MAU
+            List<Integer> months = statsMonthlyDao.listToBeProcessedDates
+                    (STATS_ACTIVE_USER_COL_NAME, endDate);
+            for (Integer month : months) {
+                System.out.println(month);
+            }
 
         }
-        // Process WAU
-
 
     }
 
