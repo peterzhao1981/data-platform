@@ -13,7 +13,6 @@ bin
 
 # Compiled classes and packages
 *.class
-target
 build
 
 # Mobile Tools for Java (J2ME)
