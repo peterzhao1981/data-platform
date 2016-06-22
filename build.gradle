@@ -1,0 +1,144 @@
+buildscript {
+    ext {
+        springBootVersion = '1.3.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        // Spring Boot plugin
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'spring-boot'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
+    archivesBaseName = 'data-platform'
+    group = 'com.mode'
+    version = '3.0'
+
+    // Global settings
+    ext {
+        // dependencies library verions
+        jjwtVersion = '0.6.0'
+        ossVersion = '2.2.3'
+        braintreeVersion = '2.62.0'
+        springFoxVersion = '2.4.0'
+        jsonpathVersion = '0.8.1'
+        mybatisVersion = '3.3.0'
+        mybatisSpringVersion = '1.2.3'
+        druidVersion = '1.0.16'
+
+        sharedManifest = manifest {
+            attributes 'Implementation-Title': "${project.name}",
+                    'Implementation-Version': "${version}",
+                    'Implementation-Vendor': 'Shanghai Yedao Technology',
+                    'Built-By': 'Mode',
+                    'Built-Date': new Date().getDateTimeString(),
+                    'Built-With': "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
+                    'Created-By': 'Java ' + System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')'
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    // Settings for the compile task
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+        options.encoding = 'UTF-8'
+        options.debug = true
+        options.compilerArgs << "-Xlint:unchecked"
+        options.compilerArgs << "-Xlint:deprecation"
+    }
+
+    // Apply 'war' plugin for all war projects
+    configure([project(":bi")]) {
+
+        apply plugin: 'war'
+    }
+
+    task wrapper(type: Wrapper) {
+        gradleVersion = '2.9'
+    }
+}
+
+project(':core') {
+
+    // create a single Jar without dependencies
+    jar {
+        classifier = 'core'
+        manifest = sharedManifest
+    }
+
+    // create a single fat Jar with all dependency class included
+    task fatJar(type: Jar) {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+        classifier = 'core'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        // Spring Boot MVC
+        compile("org.springframework.boot:spring-boot-starter-web")
+//        // Spring Boot Security
+//        compile("org.springframework.boot:spring-boot-starter-security")
+        // Spring Boot AOP - advice, etc
+        compile("org.springframework.boot:spring-boot-starter-aop")
+
+        // DevTools will automatically restart whenever files on the classpath change.
+        // In Eclipse, saving a modified file will cause the classpath to be updated and trigger
+        // a restart.
+        // In IntelliJ IDEA, building the project (Build → Make Project) will have the same effect.
+        compile("org.springframework.boot:spring-boot-devtools")
+        // JWT
+        compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
+        compile("com.alibaba:druid:${druidVersion}")
+
+        compile("org.mybatis:mybatis:${mybatisVersion}")
+        compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
+
+        // MySQL Java Driver
+        runtime("mysql:mysql-connector-java")
+    }
+}
+
+project(':bi') {
+
+    war {
+        classifier = 'bi'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        // Dependencies required by the 'Core' module
+        compile project(':core')
+        // SpringFox API Doc tool, which includes Google Guava Library.
+        // Go to localhost:8080/v2/api-docs to verify the JSON response, with large number of
+        // key-value pairs.
+        compile ("io.springfox:springfox-swagger2:${springFoxVersion}")
+        // Swagger UI is a built-in solution which makes user interaction with the
+        // Swagger-generated API documentation much easier.
+        // Go to localohost:8080/swagger-ui.html for the api docs.
+        compile ("io.springfox:springfox-swagger-ui:${springFoxVersion}")
+        // Runtime Java EE Container - Tomcat
+        providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
+        // Test dependencies required by the 'Core' module
+        testCompile project(':core')
+        // Spring Boot Test
+//        testCompile('org.springframework.boot:spring-boot-starter-test')
+//        testCompile "com.jayway.jsonpath:json-path:${jsonpathVersion}"
+//        testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
+    }
+}
