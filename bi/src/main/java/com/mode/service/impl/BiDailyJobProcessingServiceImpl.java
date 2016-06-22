@@ -17,13 +17,13 @@ import com.mode.entity.Calendar;
 import com.mode.entity.StatsDaily;
 import com.mode.entity.StatsMonthly;
 import com.mode.entity.StatsWeekly;
-import com.mode.service.BiDailyProcessingService;
+import com.mode.service.BiDailyJobProcessingService;
 
 /**
  * Created by zhaoweiwei on 16/6/21.
  */
 @Service
-public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
+public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingService {
 
     @Autowired
     private UserDao userDao;
