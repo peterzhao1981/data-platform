@@ -82,7 +82,7 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
      * @param endDate
      */
     private void processNewUser(Integer endDate) {
-        List<Integer> dates = statsDailyDao.listToBeProcessedDate(STATS_DAILY_NEW_USER_COL_NAME,
+        List<Integer> dates = statsDailyDao.listToBeProcessedDates(STATS_DAILY_NEW_USER_COL_NAME,
                 endDate);
         for (Integer date : dates) {
 //            System.out.println(date);
