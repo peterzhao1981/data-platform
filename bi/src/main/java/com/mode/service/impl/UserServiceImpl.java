@@ -24,16 +24,20 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<StatsDaily> listUserRegister(Integer startDate, Integer endDate, Integer type) {
         List<StatsDaily> list = new ArrayList<StatsDaily>();
-        try {
+
             if (type == 1) {
                 list = statsDailyDao.listStatsDailys(startDate, endDate, null, null, null);
                 return list;
             } else if (type == 2){
-                list = statsDailyDao.listStatsWeekly(startDate, endDate);
+                Integer newStartDate = calendarDao.getWeekFirstDay(startDate);
+                Integer newEndDate = calendarDao.getWeekLastDay(endDate);
+                list = statsDailyDao.listStatsWeekly(newStartDate, newEndDate);
+            } else if (type == 3) {
+                Integer newStartDate = calendarDao.getMonthFirstDay(startDate);
+                Integer newEndDate = calendarDao.getMonthLastDay(endDate);
+                list = statsDailyDao.listStatsMonthly(newStartDate, newEndDate);
             }
-        } catch (Exception e) {
 
-        }
         return list;
     }
 

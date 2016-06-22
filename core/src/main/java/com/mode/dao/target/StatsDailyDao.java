@@ -166,30 +166,60 @@ public interface StatsDailyDao {
 
     @Select({
             "<script>",
-            "select b.weekend as date,sum(a.new_reg) as newReg,sum(a.new_reg_fb) as newRegFb,sum" +
-                    "(a.new_reg_yt) as newRegYt," +
-                    "sum(orders) as orders,sum(gmv) as gmv from md_stats_daily a  inner join " +
-                    "md_calendar b on a" +
-                    ".date=b.date group by b.weekend",
+            "select b.weekend as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb,sum(a.new_user_yt) as newUserYt," +
+             "sum(`order`) as `order`,sum(gmv) as gmv,a.total_user,a.total_order,a.total_gmv from" +
+                    " md_stats_daily a  inner join " +
+             "md_calendar b on a.date=b.date ",
             "<where>",
             "<if test='startDate != null'> <![CDATA[ AND a.date >= #{startDate} ]]> </if>",
-            "<if test='endDate != null'> <![CDATA[ AND a.date <= #{endDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND a.date < #{endDate} ]]> </if>",
             "</where>",
+            "group by b.weekend ",
             "</script>"
     })
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "date", column = "date"),
-            @Result(property = "newReg", column = "new_reg"),
-            @Result(property = "newRegFb", column = "new_reg_fb"),
-            @Result(property = "newRegYt", column = "new_reg_yt"),
-            @Result(property = "totalReg", column = "total_reg"),
-            @Result(property = "actives", column = "actives"),
-            @Result(property = "orders", column = "orders"),
-            @Result(property = "totalOrders", column = "total_orders"),
+            @Result(property = "newUser", column = "new_user"),
+            @Result(property = "newUserFb", column = "new_user_fb"),
+            @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "totalUser", column = "total_user"),
+            @Result(property = "activeUser", column = "active_user"),
+            @Result(property = "order", column = "order"),
+            @Result(property = "totalOrder", column = "total_order"),
             @Result(property = "gmv", column = "gmv"),
             @Result(property = "totalGmv", column = "total_gmv")})
     public List<StatsDaily> listStatsWeekly(@Param("startDate") Integer startDate,
+                                            @Param("endDate") Integer endDate);
+
+
+    @Select({
+            "<script>",
+            "select b.month as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb," +
+                    "sum(a.new_user_yt) as newUserYt," +
+                    "sum(`order`) as `order`,sum(gmv) as gmv,a.total_user,a.total_order,a.total_gmv from" +
+                    " md_stats_daily a  inner join " +
+                    "md_calendar b on a.date=b.date ",
+            "<where>",
+            "<if test='startDate != null'> <![CDATA[ AND a.date >= #{startDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND a.date < #{endDate} ]]> </if>",
+            "</where>",
+            "group by b.month ",
+            "</script>"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "date", column = "date"),
+            @Result(property = "newUser", column = "new_user"),
+            @Result(property = "newUserFb", column = "new_user_fb"),
+            @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "totalUser", column = "total_user"),
+            @Result(property = "activeUser", column = "active_user"),
+            @Result(property = "order", column = "order"),
+            @Result(property = "totalOrder", column = "total_order"),
+            @Result(property = "gmv", column = "gmv"),
+            @Result(property = "totalGmv", column = "total_gmv")})
+    public List<StatsDaily> listStatsMonthly(@Param("startDate") Integer startDate,
                                             @Param("endDate") Integer endDate);
 
 

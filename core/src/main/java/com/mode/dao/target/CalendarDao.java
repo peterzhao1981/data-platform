@@ -59,4 +59,36 @@ public interface CalendarDao {
             @Result(property = "endTs", column = "end_ts")})
     public Calendar getCalendar(Integer date);
 
+    @Select({
+            "<script>",
+            "select date  from md_calendar where weekend = (select weekend from md_calendar where" +
+                    " date = #{startDate}) limit 1",
+            "</script>"
+    })
+    public Integer getWeekFirstDay(@Param("startDate") Integer startDate);
+
+    @Select({
+            "<script>",
+            "select date  from md_calendar where weekend = (select weekend from md_calendar where" +
+                    " date = #{endDate}) order by id desc limit 1",
+            "</script>"
+    })
+    public Integer getWeekLastDay(@Param("endDate") Integer endDate);
+
+    @Select({
+            "<script>",
+            "select date  from md_calendar where month = (select month from md_calendar where" +
+                    " date = #{startDate}) limit 1",
+            "</script>"
+    })
+    public Integer getMonthFirstDay(@Param("startDate") Integer startDate);
+
+    @Select({
+            "<script>",
+            "select date  from md_calendar where weekend = (select month from md_calendar where" +
+                    " date = #{endDate}) order by id desc limit 1",
+            "</script>"
+    })
+    public Integer getMonthLastDay(@Param("endDate") Integer endDate);
+
 }

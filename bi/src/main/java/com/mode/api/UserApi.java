@@ -24,7 +24,6 @@ public class UserApi {
                                              @RequestParam(value = "endDate") Integer endDate,
                                              @RequestParam(value = "type") Integer type) {
         List<StatsDaily> list = userService.listUserRegister(startDate, endDate, type);
-
         return list;
     }
 }
