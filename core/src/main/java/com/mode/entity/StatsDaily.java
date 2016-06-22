@@ -9,20 +9,20 @@ public class StatsDaily {
     private Integer id;
     // Date
     private Integer date;
-    // Daily new registration users count
-    private Integer newReg;
-    // Daily new registration users from facebook count
-    private Integer newRegFb;
-    // Daily new registration users from youtube count
-    private Integer newRegYt;
-    // Total new registration users count
-    private Integer totalReg;
+    // Daily new users count
+    private Integer newUser;
+    // Daily new users from facebook count
+    private Integer newUserFb;
+    // Daily new  users from youtube count
+    private Integer newUserYt;
+    // Total new users count
+    private Integer totalUser;
     // Daily active users count
-    private Integer actives;
+    private Integer activeUser;
     // Daily orders count
-    private Integer orders;
+    private Integer order;
     // Total orders count
-    private Integer totalOrders;
+    private Integer totalOrder;
     // Daily gmv
     private Float gmv;
     // Total gmv
@@ -44,60 +44,60 @@ public class StatsDaily {
         this.date = date;
     }
 
-    public Integer getNewReg() {
-        return newReg;
+    public Integer getNewUser() {
+        return newUser;
     }
 
-    public void setNewReg(Integer newReg) {
-        this.newReg = newReg;
+    public void setNewUser(Integer newUser) {
+        this.newUser = newUser;
     }
 
-    public Integer getNewRegFb() {
-        return newRegFb;
+    public Integer getNewUserFb() {
+        return newUserFb;
     }
 
-    public void setNewRegFb(Integer newRegFb) {
-        this.newRegFb = newRegFb;
+    public void setNewUserFb(Integer newUserFb) {
+        this.newUserFb = newUserFb;
     }
 
-    public Integer getNewRegYt() {
-        return newRegYt;
+    public Integer getNewUserYt() {
+        return newUserYt;
     }
 
-    public void setNewRegYt(Integer newRegYt) {
-        this.newRegYt = newRegYt;
+    public void setNewUserYt(Integer newUserYt) {
+        this.newUserYt = newUserYt;
     }
 
-    public Integer getTotalReg() {
-        return totalReg;
+    public Integer getTotalUser() {
+        return totalUser;
     }
 
-    public void setTotalReg(Integer totalReg) {
-        this.totalReg = totalReg;
+    public void setTotalUser(Integer totalUser) {
+        this.totalUser = totalUser;
     }
 
-    public Integer getActives() {
-        return actives;
+    public Integer getActiveUser() {
+        return activeUser;
     }
 
-    public void setActives(Integer actives) {
-        this.actives = actives;
+    public void setActiveUser(Integer activeUser) {
+        this.activeUser = activeUser;
     }
 
-    public Integer getOrders() {
-        return orders;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setOrders(Integer orders) {
-        this.orders = orders;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
-    public Integer getTotalOrders() {
-        return totalOrders;
+    public Integer getTotalOrder() {
+        return totalOrder;
     }
 
-    public void setTotalOrders(Integer totalOrders) {
-        this.totalOrders = totalOrders;
+    public void setTotalOrder(Integer totalOrder) {
+        this.totalOrder = totalOrder;
     }
 
     public Float getGmv() {
