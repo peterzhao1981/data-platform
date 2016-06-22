@@ -161,8 +161,8 @@ public interface StatsDailyDao {
             "</where>",
             "</script>"
     })
-    public List<Integer> getToBeProcessedDate(@Param("columnName") String columnName,
-                                              @Param("endDate") Integer endDate);
+    public List<Integer> listToBeProcessedDates(@Param("columnName") String columnName,
+                                                @Param("endDate") Integer endDate);
 
 
 }

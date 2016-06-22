@@ -26,7 +26,7 @@ public interface CalendarDao {
             "SELECT * FROM md_calendar ",
             "<where>",
             "<if test='startDate != null'> <![CDATA[ AND date > #{startDate} ]]> </if>",
-            "<if test='endDate != null'> <![CDATA[ AND date <= #{endDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND date < #{endDate} ]]> </if>",
             "</where>",
             "</script>"
     })

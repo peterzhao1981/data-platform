@@ -54,7 +54,7 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
         df.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         // Process endDate is yesterday
-        Integer endDate = Integer.parseInt(df.format(now - 24 * 3600 * 1000));
+        Integer endDate = Integer.parseInt(df.format(now));
 
         Integer lastProcessedDate = statsDailyDao.getLastProcessedDate(null);
         if (lastProcessedDate == null) {
@@ -82,7 +82,7 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
      * @param endDate
      */
     private void processNewUser(Integer endDate) {
-        List<Integer> dates = statsDailyDao.getToBeProcessedDate(STATS_DAILY_NEW_USER_COL_NAME,
+        List<Integer> dates = statsDailyDao.listToBeProcessedDate(STATS_DAILY_NEW_USER_COL_NAME,
                 endDate);
         for (Integer date : dates) {
 //            System.out.println(date);
@@ -128,9 +128,14 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
      */
     private void processActiveUser(Integer endDate) {
         // Process DAU
-        List<Integer> dates = statsDailyDao.getToBeProcessedDate(STATS_DAILY_ACTIVE_USER_COL_NAME,
+        List<Integer> dates = statsDailyDao.listToBeProcessedDates(STATS_DAILY_ACTIVE_USER_COL_NAME,
                 endDate);
-        
+        for (Integer date : dates) {
+
+        }
+        // Process WAU
+
+
     }
 
 //    public static void main(String[] args) {
