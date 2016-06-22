@@ -24,9 +24,9 @@ public interface StatsDailyDao {
      * @return
      */
     @Insert("INSERT INTO md_stats_daily (date, new_user, new_user_fb, new_user_yt, total_user, " +
-            "actives, orders, total_orders, gmv, total_gmv) " +
+            "active_user, `order`, total_order, gmv, total_gmv) " +
             "VALUES (#{date}, #{newUser}, #{newUserFb}, #{newUserYt}, #{totalUser}, " +
-            "#{actives}, #{orders}, #{totalOrders}, #{gmv}, #{totalGmv})")
+            "#{activeUser}, #{order}, #{totalOrder}, #{gmv}, #{totalGmv})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
     public Integer createStatsDaily(StatsDaily statsDaily);
@@ -45,9 +45,9 @@ public interface StatsDailyDao {
             "<if test='newUserFb != null'> new_user_fb = #{newUserFb}, </if>",
             "<if test='newUserYt != null'> new_user_yt = #{newUserYt}, </if>",
             "<if test='totalUser != null'> total_user = #{totalUser}, </if>",
-            "<if test='actives != null'> actives = #{actives}, </if>",
-            "<if test='orders != null'> orders = #{orders}, </if>",
-            "<if test='totalOrders != null'> total_orders = #{totalOrders}, </if>",
+            "<if test='activeUser != null'> active_user = #{activeUser}, </if>",
+            "<if test='order != null'> order = #{order}, </if>",
+            "<if test='totalOrder != null'> total_order = #{totalOrder}, </if>",
             "<if test='gmv != null'> gmv = #{gmv}, </if>",
             "<if test='totalGmv != null'> total_gmv = #{totalGmv}, </if>",
             "</set>",
@@ -74,9 +74,9 @@ public interface StatsDailyDao {
             "<if test='newUserFb != null'> AND new_user_fb = #{newUserFb} </if>",
             "<if test='newUserYt != null'> AND new_user_yt = #{newUserYt} </if>",
             "<if test='totalUser != null'> AND total_user = #{totalUser} </if>",
-            "<if test='actives != null'> AND actives = #{actives} </if>",
-            "<if test='orders != null'> AND orders = #{orders} </if>",
-            "<if test='totalOrders != null'> AND total_orders = #{totalOrders} </if>",
+            "<if test='activeUser != null'> AND active_user = #{activeUser} </if>",
+            "<if test='order != null'> AND order = #{order} </if>",
+            "<if test='totalOrder != null'> AND total_order = #{totalOrder} </if>",
             "<if test='gmv != null'> AND gmv = #{gmv} </if>",
             "<if test='totalGmv != null'> AND total_gmv = #{totalGmv} </if>",
             "</otherwise>",
@@ -91,9 +91,9 @@ public interface StatsDailyDao {
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
             @Result(property = "totalUser", column = "total_user"),
-            @Result(property = "actives", column = "actives"),
-            @Result(property = "orders", column = "orders"),
-            @Result(property = "totalOrders", column = "total_orders"),
+            @Result(property = "activeUser", column = "active_user"),
+            @Result(property = "order", column = "order"),
+            @Result(property = "totalOrder", column = "total_order"),
             @Result(property = "gmv", column = "gmv"),
             @Result(property = "totalGmv", column = "total_gmv")})
     public StatsDaily getStatsDaily(StatsDaily statsDaily);
@@ -128,9 +128,9 @@ public interface StatsDailyDao {
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
             @Result(property = "totalUser", column = "total_user"),
-            @Result(property = "actives", column = "actives"),
-            @Result(property = "orders", column = "orders"),
-            @Result(property = "totalOrders", column = "total_orders"),
+            @Result(property = "activeUser", column = "active_user"),
+            @Result(property = "order", column = "order"),
+            @Result(property = "totalOrder", column = "total_order"),
             @Result(property = "gmv", column = "gmv"),
             @Result(property = "totalGmv", column = "total_gmv")})
     public List<StatsDaily> listStatsDailys(@Param("startDate") Integer startDate,

@@ -30,19 +30,19 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
     @Autowired
     private CalendarDao calendarDao;
 
-    private final String STATS_DAILY_NEW_REG_COL_NAME = "new_reg";
+    private final String STATS_DAILY_NEW_USER_COL_NAME = "new_user";
 
-    private final String STATS_DAILY_NEW_REG_FB_COL_NAME = "new_reg_fb";
+    private final String STATS_DAILY_NEW_USER_FB_COL_NAME = "new_user_fb";
 
-    private final String STATS_DAILY_NEW_REG_YT_COL_NAME = "new_reg_yt";
+    private final String STATS_DAILY_NEW_USER_YT_COL_NAME = "new_user_yt";
 
-    private final String STATS_DAILY_TOTAL_REG_COL_NAME = "total_reg";
+    private final String STATS_DAILY_TOTAL_USER_COL_NAME = "total_user";
 
-    private final String STATS_DAILY_ACTIVES_COL_NAME = "actives";
+    private final String STATS_DAILY_ACTIVE_USER_COL_NAME = "active_user";
 
-    private final String STATS_DAILY_ORDERS_COL_NAME = "orders";
+    private final String STATS_DAILY_ORDER_COL_NAME = "order";
 
-    private final String STATS_DAILY_TOTAL_ORDERS_COL_NAME = "total_orders";
+    private final String STATS_DAILY_TOTAL_ORDER_COL_NAME = "total_order";
 
     private final String STATS_DAILY_GMV_COL_NAME = "gmv";
 
@@ -82,23 +82,24 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
      * @param endDate
      */
     private void processUserRegistration(Integer endDate) {
-        List<Integer> dates = statsDailyDao.getToBeProcessedDate(STATS_DAILY_NEW_REG_COL_NAME,
+        List<Integer> dates = statsDailyDao.getToBeProcessedDate(STATS_DAILY_NEW_USER_COL_NAME,
                 endDate);
         for (Integer date : dates) {
-            Calendar calendar = calendarDao.getCalendar(date);
-            Long startTs = calendar.getStartTs();
-            Long endTs = calendar.getEndTs();
-            Integer count = userDao.countUsers(null, startTs, endTs);
-            Integer fbCount = userDao.countUsers(AppConfig.USER_SOURCE_FACEBOOK, startTs, endTs);
-            Integer ytCount = userDao.countUsers(AppConfig.USER_SOURCE_YOUTUBE, startTs, endTs);
-            Integer totalCount = userDao.countUsers(null, null, null);
-            StatsDaily statsDaily = new StatsDaily();
-            statsDaily.setDate(date);
-            statsDaily.setNewUser(count);
-            statsDaily.setNewUserFb(fbCount);
-            statsDaily.setNewUserYt(ytCount);
-            statsDaily.setTotalUser(totalCount);
-            statsDailyDao.updateStatsDaily(statsDaily);
+            System.out.println(date);
+//            Calendar calendar = calendarDao.getCalendar(date);
+//            Long startTs = calendar.getStartTs();
+//            Long endTs = calendar.getEndTs();
+//            Integer count = userDao.countUsers(null, startTs, endTs);
+//            Integer fbCount = userDao.countUsers(AppConfig.USER_SOURCE_FACEBOOK, startTs, endTs);
+//            Integer ytCount = userDao.countUsers(AppConfig.USER_SOURCE_YOUTUBE, startTs, endTs);
+//            Integer totalCount = userDao.countUsers(null, null, null);
+//            StatsDaily statsDaily = new StatsDaily();
+//            statsDaily.setDate(date);
+//            statsDaily.setNewUser(count);
+//            statsDaily.setNewUserFb(fbCount);
+//            statsDaily.setNewUserYt(ytCount);
+//            statsDaily.setTotalUser(totalCount);
+//            statsDailyDao.updateStatsDaily(statsDaily);
         }
     }
 
@@ -126,7 +127,10 @@ public class BiDailyProcessingServiceImpl implements BiDailyProcessingService {
      * @param endDate
      */
     private void processActives(Integer endDate) {
-
+        // Process DAU
+        List<Integer> dates = statsDailyDao.getToBeProcessedDate(STATS_DAILY_NEW_USER_COL_NAME,
+                endDate);
+        
     }
 
 //    public static void main(String[] args) {

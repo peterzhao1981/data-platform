@@ -18,11 +18,11 @@ public class StatsDaily {
     // Total new users count
     private Integer totalUser;
     // Daily active users count
-    private Integer actives;
+    private Integer activeUser;
     // Daily orders count
-    private Integer orders;
+    private Integer order;
     // Total orders count
-    private Integer totalOrders;
+    private Integer totalOrder;
     // Daily gmv
     private Float gmv;
     // Total gmv
@@ -76,28 +76,28 @@ public class StatsDaily {
         this.totalUser = totalUser;
     }
 
-    public Integer getActives() {
-        return actives;
+    public Integer getActiveUser() {
+        return activeUser;
     }
 
-    public void setActives(Integer actives) {
-        this.actives = actives;
+    public void setActiveUser(Integer activeUser) {
+        this.activeUser = activeUser;
     }
 
-    public Integer getOrders() {
-        return orders;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setOrders(Integer orders) {
-        this.orders = orders;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
-    public Integer getTotalOrders() {
-        return totalOrders;
+    public Integer getTotalOrder() {
+        return totalOrder;
     }
 
-    public void setTotalOrders(Integer totalOrders) {
-        this.totalOrders = totalOrders;
+    public void setTotalOrder(Integer totalOrder) {
+        this.totalOrder = totalOrder;
     }
 
     public Float getGmv() {
