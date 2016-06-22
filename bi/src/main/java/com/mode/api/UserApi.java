@@ -21,8 +21,9 @@ public class UserApi {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public List<StatsDaily> listUserRegister(@RequestParam(value = "startDate") Integer startDate,
-                            @RequestParam(value = "endDate") Integer endDate) {
-        List<StatsDaily> list = userService.listUserRegister(startDate, endDate);
+                                             @RequestParam(value = "endDate") Integer endDate,
+                                             @RequestParam(value = "type") Integer type) {
+        List<StatsDaily> list = userService.listUserRegister(startDate, endDate, type);
 
         return list;
     }
