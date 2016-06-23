@@ -76,7 +76,7 @@ public interface StatsMonthlyDao {
             "select * from md_stats_monthly ",
             "<where>",
             "<if test='endDate != null'>  <![CDATA[ AND date >= #{startDate} ]]> </if>",
-            "<if test='endDate != null'>  <![CDATA[ AND date < #{endDate} ]]> </if>",
+            "<if test='endDate != null'>  <![CDATA[ AND date <= #{endDate} ]]> </if>",
             "</where>",
             "</script>"
     })

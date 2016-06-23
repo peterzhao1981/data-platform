@@ -75,7 +75,7 @@ public interface StatsWeeklyDao {
             "select * from md_stats_weekly ",
             "<where>",
             "<if test='endDate != null'>  <![CDATA[ AND date >= #{startDate} ]]> </if>",
-            "<if test='endDate != null'>  <![CDATA[ AND date < #{endDate} ]]> </if>",
+            "<if test='endDate != null'>  <![CDATA[ AND date <= #{endDate} ]]> </if>",
             "</where>",
             "</script>"
     })

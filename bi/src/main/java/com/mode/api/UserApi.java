@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by kang on 2016/6/22.
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/stats")
 public class UserApi {
 
     @Autowired
@@ -44,7 +44,7 @@ public class UserApi {
      * @param endDate
      * @return
      */
-    @RequestMapping(value = "/weekly", method = RequestMethod.GET)
+    @RequestMapping(value = "/active/weekly", method = RequestMethod.GET)
     public List<StatsWeekly> listWeeklyActivityUser(@RequestParam(value = "startDate") Integer
                                                              startDate,
                                                      @RequestParam(value = "endDate") Integer
@@ -60,7 +60,7 @@ public class UserApi {
      * @param endDate
      * @return
      */
-    @RequestMapping(value = "/monthly", method = RequestMethod.GET)
+    @RequestMapping(value = "/active/monthly", method = RequestMethod.GET)
     public List<StatsMonthly> listMonthlyActivityUser(@RequestParam(value = "startDate") Integer startDate,
                                                     @RequestParam(value = "endDate") Integer endDate) {
         List<StatsMonthly> list = userService.listMonthlyActivityUser(startDate, endDate);

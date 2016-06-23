@@ -191,7 +191,7 @@ public interface StatsDailyDao {
              "md_calendar b on a.date=b.date ",
             "<where>",
             "<if test='startDate != null'> <![CDATA[ AND a.date >= #{startDate} ]]> </if>",
-            "<if test='endDate != null'> <![CDATA[ AND a.date < #{endDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND a.date <= #{endDate} ]]> </if>",
             "</where>",
             "group by b.weekend ",
             "</script>"
@@ -228,7 +228,7 @@ public interface StatsDailyDao {
                     "md_calendar b on a.date=b.date ",
             "<where>",
             "<if test='startDate != null'> <![CDATA[ AND a.date >= #{startDate} ]]> </if>",
-            "<if test='endDate != null'> <![CDATA[ AND a.date < #{endDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND a.date <= #{endDate} ]]> </if>",
             "</where>",
             "group by b.month ",
             "</script>"
