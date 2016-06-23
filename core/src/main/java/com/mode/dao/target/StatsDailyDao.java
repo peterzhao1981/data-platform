@@ -140,7 +140,12 @@ public interface StatsDailyDao {
                                             @Param("offset") Integer offset);
 
 
-
+    /**
+     * Get last processed date.
+     *
+     * @param columnName
+     * @return
+     */
     @Select({
             "<script>",
             "SELECT max(date) FROM md_stats_daily ",
@@ -152,6 +157,13 @@ public interface StatsDailyDao {
     public Integer getLastProcessedDate(String columnName);
 
 
+    /**
+     * List to be processed dates.
+     *
+     * @param columnName
+     * @param endDate
+     * @return
+     */
     @Select({
             "<script>",
             "SELECT date FROM md_stats_daily ",
@@ -164,6 +176,13 @@ public interface StatsDailyDao {
     public List<Integer> listToBeProcessedDates(@Param("columnName") String columnName,
                                                 @Param("endDate") Integer endDate);
 
+    /**
+     * List daily user register,order,gmv
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     @Select({
             "<script>",
             "select b.weekend as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb,sum(a.new_user_yt) as newUserYt," +
@@ -193,6 +212,13 @@ public interface StatsDailyDao {
                                             @Param("endDate") Integer endDate);
 
 
+    /**
+     * List monthly user register,order,gmv
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     @Select({
             "<script>",
             "select b.month as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb," +

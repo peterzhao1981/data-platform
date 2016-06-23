@@ -15,7 +15,7 @@ import com.mode.entity.Calendar;
 public interface CalendarDao {
 
     /**
-     * List calendars.
+     * List calendars from starDate to endDate.
      *
      * @param startDate
      * @param endDate
@@ -42,6 +42,12 @@ public interface CalendarDao {
     public List<Calendar> listCalendars(@Param("startDate") Integer startDate,
                                         @Param("endDate") Integer endDate);
 
+    /**
+     * Get calendar by date.
+     *
+     * @param date
+     * @return
+     */
     @Select({
             "<script>",
             "SELECT * FROM md_calendar ",
@@ -58,7 +64,7 @@ public interface CalendarDao {
             @Result(property = "startTs", column = "start_ts"),
             @Result(property = "endTs", column = "end_ts")})
     public Calendar getCalendar(Integer date);
-
+    
     @Select({
             "<script>",
             "select date  from md_calendar where weekend = (select weekend from md_calendar where" +
@@ -91,4 +97,43 @@ public interface CalendarDao {
     })
     public Integer getMonthLastDay(@Param("endDate") Integer endDate);
 
+
+    /**
+     * List weekends from startDate to endDate.
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "SELECT distinct weekend FROM md_calendar ",
+            "<where>",
+            "<if test='startDate != null'> <![CDATA[ AND weekend > #{startDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND weekend < #{endDate} ]]> </if>",
+            "</where>",
+            "</script>"
+    })
+    public List<Integer> listWeekends(@Param("startDate") Integer startDate,
+                                      @Param("endDate") Integer endDate);
+
+
+    /**
+     * List months from startDate to endDate.
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "SELECT distinct month FROM md_calendar ",
+            "<where>",
+            "<if test='startDate != null'> <![CDATA[ AND month > #{startDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND month < #{endDate} ]]> </if>",
+            "</where>",
+            "</script>"
+    })
+    public List<Integer> listMonths(@Param("startDate") Integer startDate,
+                                    @Param("endDate") Integer endDate);
 }

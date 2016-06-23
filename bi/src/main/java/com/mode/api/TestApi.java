@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mode.service.BiDailyProcessingService;
+import com.mode.service.BiDailyJobProcessingService;
 
 /**
  * Created by zhaoweiwei on 16/6/20.
@@ -14,10 +14,10 @@ import com.mode.service.BiDailyProcessingService;
 public class TestApi {
 
     @Autowired
-    private BiDailyProcessingService biDailyProcessingService;
+    private BiDailyJobProcessingService biDailyJobProcessingService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public void test() {
-        biDailyProcessingService.process();
+        biDailyJobProcessingService.process();
     }
 }

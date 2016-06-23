@@ -2,7 +2,11 @@ package com.mode.service.impl;
 
 import com.mode.dao.target.CalendarDao;
 import com.mode.dao.target.StatsDailyDao;
+import com.mode.dao.target.StatsMonthlyDao;
+import com.mode.dao.target.StatsWeeklyDao;
 import com.mode.entity.StatsDaily;
+import com.mode.entity.StatsMonthly;
+import com.mode.entity.StatsWeekly;
 import com.mode.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,12 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private CalendarDao calendarDao;
+
+    @Autowired
+    private StatsWeeklyDao statsWeeklyDao;
+
+    @Autowired
+    private StatsMonthlyDao statsMonthlyDao;
 
     @Override
     public List<StatsDaily> listUserRegister(Integer startDate, Integer endDate, Integer type) {
@@ -41,4 +51,17 @@ public class UserServiceImpl implements UserService{
         return list;
     }
 
+    @Override
+    public List<StatsWeekly> listWeeklyActivityUser(Integer startDate, Integer endDate) {
+        List<StatsWeekly> list = new ArrayList<StatsWeekly>();
+        list = statsWeeklyDao.listWeeklyActivityUser(startDate, endDate);
+        return list;
+    }
+
+    @Override
+    public List<StatsMonthly> listMonthlyActivityUser(Integer startDate, Integer endDate) {
+        List<StatsMonthly> list = new ArrayList<StatsMonthly>();
+        list = statsMonthlyDao.listMonthlyActivityUser(startDate, endDate);
+        return list;
+    }
 }

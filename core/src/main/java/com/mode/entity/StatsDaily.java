@@ -7,7 +7,7 @@ public class StatsDaily {
 
     // Unique id
     private Integer id;
-    // Date
+    // Daily Date
     private Integer date;
     // Daily new users count
     private Integer newUser;
