@@ -1,6 +1,9 @@
 package com.mode.service.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -8,13 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mode.base.AppConfig;
+import com.mode.dao.ElasticSearchDao;
 import com.mode.dao.source.UserDao;
 import com.mode.dao.target.CalendarDao;
 import com.mode.dao.target.StatsDailyDao;
+import com.mode.dao.target.StatsHourlyRequestDao;
 import com.mode.dao.target.StatsMonthlyDao;
 import com.mode.dao.target.StatsWeeklyDao;
 import com.mode.entity.Calendar;
 import com.mode.entity.StatsDaily;
+import com.mode.entity.StatsHourlyRequest;
 import com.mode.entity.StatsMonthly;
 import com.mode.entity.StatsWeekly;
 import com.mode.service.BiDailyJobProcessingService;
@@ -38,6 +44,12 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
     private StatsMonthlyDao statsMonthlyDao;
 
     @Autowired
+    private StatsHourlyRequestDao statsHourlyRequestDao;
+
+    @Autowired
+    private ElasticSearchDao elasticSearchDao;
+
+    @Autowired
     private CalendarDao calendarDao;
 
     private final String STATS_NEW_USER_COL_NAME = "new_user";
@@ -58,6 +70,8 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
 
     private final String STATS_TOTAL_GMV_COL_NAME = "total_gmv";
 
+    private final String STATS_HOURLY_REQUEST_COL_NAME = "h1";
+
     @Override
     public void process() {
         long now = System.currentTimeMillis();
@@ -69,6 +83,8 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
         processDailyStats(endDate);
         processWeeklyStats(endDate);
         processMonthlyStats(endDate);
+        processCountry();
+        processHourlyRequest(endDate);
     }
 
     /**
@@ -94,6 +110,7 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
         processActiveUser(endDate, AppConfig.STATS_TYPE_DAILY);
     }
 
+
     /**
      * Process weekly stats.
      *
@@ -114,6 +131,7 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
         }
         processActiveUser(endWeekend, AppConfig.STATS_TYPE_WEEKLY);
     }
+
 
     /**
      * Process monthly stats.
@@ -144,24 +162,28 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
      * @param endDate
      */
     private void processNewUser(Integer endDate) {
-        List<Integer> dates = statsDailyDao.listToBeProcessedDates(STATS_NEW_USER_COL_NAME,
-                endDate);
-        for (Integer date : dates) {
-//            System.out.println(date);
-            Calendar calendar = calendarDao.getCalendar(date);
-            Long startTs = calendar.getStartTs();
-            Long endTs = calendar.getEndTs();
-            Integer count = userDao.countUsers(null, startTs, endTs);
-            Integer fbCount = userDao.countUsers(AppConfig.USER_SOURCE_FACEBOOK, startTs, endTs);
-            Integer ytCount = userDao.countUsers(AppConfig.USER_SOURCE_YOUTUBE, startTs, endTs);
-            Integer totalCount = userDao.countUsers(null, null, null);
-            StatsDaily statsDaily = new StatsDaily();
-            statsDaily.setDate(date);
-            statsDaily.setNewUser(count);
-            statsDaily.setNewUserFb(fbCount);
-            statsDaily.setNewUserYt(ytCount);
-            statsDaily.setTotalUser(totalCount);
-            statsDailyDao.updateStatsDaily(statsDaily);
+        try {
+            List<Integer> dates = statsDailyDao.listToBeProcessedDates(STATS_NEW_USER_COL_NAME,
+                    endDate);
+            for (Integer date : dates) {
+    //            System.out.println(date);
+                Calendar calendar = calendarDao.getCalendar(date);
+                Long startTs = calendar.getStartTs();
+                Long endTs = calendar.getEndTs();
+                Integer count = userDao.countUsers(null, startTs, endTs);
+                Integer fbCount = userDao.countUsers(AppConfig.USER_SOURCE_FACEBOOK, startTs, endTs);
+                Integer ytCount = userDao.countUsers(AppConfig.USER_SOURCE_YOUTUBE, startTs, endTs);
+                Integer totalCount = userDao.countUsers(null, null, null);
+                StatsDaily statsDaily = new StatsDaily();
+                statsDaily.setDate(date);
+                statsDaily.setNewUser(count);
+                statsDaily.setNewUserFb(fbCount);
+                statsDaily.setNewUserYt(ytCount);
+                statsDaily.setTotalUser(totalCount);
+                statsDailyDao.updateStatsDaily(statsDaily);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -171,7 +193,11 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
      * @param endDate
      */
     private void processOrder(Integer endDate) {
+        try {
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -180,7 +206,11 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
      * @param endDate
      */
     private void processGmv(Integer endDate) {
+        try {
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -189,34 +219,122 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
      * @param endDate
      */
     private void processActiveUser(Integer endDate, String type) {
-        if (AppConfig.STATS_TYPE_DAILY.equalsIgnoreCase(type)) {
-            // Process DAU
-            List<Integer> dates = statsDailyDao.listToBeProcessedDates
-                    (STATS_ACTIVE_USER_COL_NAME, endDate);
-            for (Integer date : dates) {
-                System.out.println(date);
-            }
-        } else if (AppConfig.STATS_TYPE_WEEKLY.equalsIgnoreCase(type)) {
-            // Process WAU
-            List<Integer> weekends = statsWeeklyDao.listToBeProcessedDates
-                    (STATS_ACTIVE_USER_COL_NAME, endDate);
-            for (Integer weekend : weekends) {
-                System.out.println(weekend);
-            }
-        } else if (AppConfig.STATS_TYPE_MONTHLY.equalsIgnoreCase(type)) {
-            // Process MAU
-            List<Integer> months = statsMonthlyDao.listToBeProcessedDates
-                    (STATS_ACTIVE_USER_COL_NAME, endDate);
-            for (Integer month : months) {
-                System.out.println(month);
-            }
+        try {
+            if (AppConfig.STATS_TYPE_DAILY.equalsIgnoreCase(type)) {
+                // Process DAU
+                List<Integer> dates = statsDailyDao.listToBeProcessedDates
+                        (STATS_ACTIVE_USER_COL_NAME, endDate);
+                for (Integer date : dates) {
+                    System.out.println(date);
+                }
+            } else if (AppConfig.STATS_TYPE_WEEKLY.equalsIgnoreCase(type)) {
+                // Process WAU
+                List<Integer> weekends = statsWeeklyDao.listToBeProcessedDates
+                        (STATS_ACTIVE_USER_COL_NAME, endDate);
+                for (Integer weekend : weekends) {
+                    System.out.println(weekend);
+                }
+            } else if (AppConfig.STATS_TYPE_MONTHLY.equalsIgnoreCase(type)) {
+                // Process MAU
+                List<Integer> months = statsMonthlyDao.listToBeProcessedDates
+                        (STATS_ACTIVE_USER_COL_NAME, endDate);
+                for (Integer month : months) {
+                    System.out.println(month);
+                }
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
-//    public static void main(String[] args) {
-//        BiDailyProcessingServiceImpl biDailyProcessingService = new BiDailyProcessingServiceImpl();
-//        biDailyProcessingService.process();
+    /**
+     * Process user country distribution.
+     *
+     */
+    private void processCountry() {
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Process hourly request.
+     *
+     * @param endDate
+     */
+    private void processHourlyRequest(Integer endDate) {
+        try {
+            Integer lastProcessedDate = statsHourlyRequestDao.getLastProcessedDate(null);
+            if (lastProcessedDate == null) {
+                lastProcessedDate = AppConfig.LAST_PROCESSED_DAILY_DATE;
+            }
+
+            // Get all dates from lastestDate to endDate
+            List<Calendar> calendars = calendarDao.listCalendars(lastProcessedDate, endDate);
+            for (Calendar calendar : calendars) {
+                StatsHourlyRequest statsHourlyRequest = new StatsHourlyRequest();
+                statsHourlyRequest.setDate(calendar.getDate());
+                statsHourlyRequestDao.createStatsHourlyRequest(statsHourlyRequest);
+            }
+
+            List<Integer> dates = statsHourlyRequestDao.listToBeProcessedDates
+                    (STATS_HOURLY_REQUEST_COL_NAME, endDate);
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+            df.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+
+            for (Integer date : dates) {
+                Calendar calendar = calendarDao.getCalendar(date);
+                List<Long> countList = elasticSearchDao.getRequsetCountByHour(calendar.getStartTs(),
+                        calendar.getEndTs());
+                if (countList.size() == 24) {
+                    StatsHourlyRequest statsHourlyRequest = new StatsHourlyRequest();
+                    statsHourlyRequest.setDate(date);
+                    statsHourlyRequest.setH1(countList.get(0).intValue());
+                    statsHourlyRequest.setH2(countList.get(1).intValue());
+                    statsHourlyRequest.setH3(countList.get(2).intValue());
+                    statsHourlyRequest.setH4(countList.get(3).intValue());
+                    statsHourlyRequest.setH5(countList.get(4).intValue());
+                    statsHourlyRequest.setH6(countList.get(5).intValue());
+                    statsHourlyRequest.setH7(countList.get(6).intValue());
+                    statsHourlyRequest.setH8(countList.get(7).intValue());
+                    statsHourlyRequest.setH9(countList.get(8).intValue());
+                    statsHourlyRequest.setH10(countList.get(9).intValue());
+                    statsHourlyRequest.setH11(countList.get(10).intValue());
+                    statsHourlyRequest.setH12(countList.get(11).intValue());
+                    statsHourlyRequest.setH13(countList.get(12).intValue());
+                    statsHourlyRequest.setH14(countList.get(13).intValue());
+                    statsHourlyRequest.setH15(countList.get(14).intValue());
+                    statsHourlyRequest.setH16(countList.get(15).intValue());
+                    statsHourlyRequest.setH17(countList.get(16).intValue());
+                    statsHourlyRequest.setH18(countList.get(17).intValue());
+                    statsHourlyRequest.setH19(countList.get(18).intValue());
+                    statsHourlyRequest.setH20(countList.get(19).intValue());
+                    statsHourlyRequest.setH21(countList.get(20).intValue());
+                    statsHourlyRequest.setH22(countList.get(21).intValue());
+                    statsHourlyRequest.setH23(countList.get(22).intValue());
+                    statsHourlyRequest.setH24(countList.get(23).intValue());
+
+                    statsHourlyRequestDao.updateStatsHourlyRequest(statsHourlyRequest);
+                }
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+//    public static void main(String[] args) throws Exception {
+//        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+//        df.setTimeZone(TimeZone.getTimeZone("GMT+7:00"));
+//        System.out.println(df.parse(df.format(1464192000000l)));
+//
+//
 //    }
 }

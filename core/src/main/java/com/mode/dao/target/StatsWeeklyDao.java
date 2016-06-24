@@ -46,7 +46,7 @@ public interface StatsWeeklyDao {
 
 
     /**
-     * List to be processed dates.
+     * List column's to be processed dates.
      *
      * @param columnName
      * @param endDate
