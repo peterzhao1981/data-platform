@@ -33,6 +33,7 @@ subprojects {
         mybatisVersion = '3.3.0'
         mybatisSpringVersion = '1.2.3'
         druidVersion = '1.0.16'
+        elasticSearchVersion = '1.7.1'
 
         sharedManifest = manifest {
             attributes 'Implementation-Title': "${project.name}",
@@ -88,6 +89,7 @@ project(':core') {
     }
 
     dependencies {
+        // Spring Boot jdbc
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         // Spring Boot MVC
         compile("org.springframework.boot:spring-boot-starter-web")
@@ -103,9 +105,11 @@ project(':core') {
         compile("org.springframework.boot:spring-boot-devtools")
         // JWT
         compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
+        // Ali druid
         compile("com.alibaba:druid:${druidVersion}")
-
+        // Mybatis
         compile("org.mybatis:mybatis:${mybatisVersion}")
+        // Mybatis spring
         compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
 
         // MySQL Java Driver
@@ -131,6 +135,10 @@ project(':bi') {
         // Swagger-generated API documentation much easier.
         // Go to localohost:8080/swagger-ui.html for the api docs.
         compile ("io.springfox:springfox-swagger-ui:${springFoxVersion}")
+
+        // ElasticSearch
+        compile "org.elasticsearch:elasticsearch:${elasticSearchVersion}"
+
         // Runtime Java EE Container - Tomcat
         providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
