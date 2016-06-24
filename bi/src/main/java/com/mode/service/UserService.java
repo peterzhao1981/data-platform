@@ -1,8 +1,5 @@
 package com.mode.service;
 
-import com.mode.entity.StatsDaily;
-import com.mode.entity.StatsMonthly;
-import com.mode.entity.StatsWeekly;
 import java.util.List;
 
 /**
@@ -18,23 +15,5 @@ public interface UserService {
      * @param type
      * @return
      */
-    public List<StatsDaily> listUserRegister(Integer startDate, Integer endDate, Integer type);
-
-    /**
-     * List weekly active user
-     *
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    public List<StatsWeekly> listWeeklyActivityUser(Integer startDate, Integer endDate);
-
-    /**
-     * List monthly active user
-     *
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    public List<StatsMonthly> listMonthlyActivityUser(Integer startDate, Integer endDate);
+    public List<? extends Object> listStatsInfo(Integer startDate, Integer endDate, Integer type);
 }

@@ -1,9 +1,9 @@
 package com.mode.api;
 
-import com.mode.entity.StatsDaily;
-import com.mode.entity.StatsMonthly;
-import com.mode.entity.StatsWeekly;
 import com.mode.service.UserService;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +21,8 @@ public class UserApi {
     @Autowired
     private UserService userService;
 
+    static final SimpleDateFormat sdf =new SimpleDateFormat("yyyyMMdd");
+
     /**
      * Get daily data for user register,order ,gmv
      *
@@ -30,40 +32,27 @@ public class UserApi {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<StatsDaily> listUserRegister(@RequestParam(value = "startDate") Integer startDate,
+    public List<? extends Object> listStatsInfo(@RequestParam(value = "startDate") Integer startDate,
                                              @RequestParam(value = "endDate") Integer endDate,
                                              @RequestParam(value = "type") Integer type) {
-        List<StatsDaily> list = userService.listUserRegister(startDate, endDate, type);
+        List<? extends Object> list = userService.listStatsInfo(startDate, endDate, type);
         return list;
     }
 
     /**
-     * Get weekly active user
+     * Get dashboard stats information
      *
-     * @param startDate
-     * @param endDate
      * @return
      */
-    @RequestMapping(value = "/active/weekly", method = RequestMethod.GET)
-    public List<StatsWeekly> listWeeklyActivityUser(@RequestParam(value = "startDate") Integer
-                                                             startDate,
-                                                     @RequestParam(value = "endDate") Integer
-                                                             endDate) {
-        List<StatsWeekly> list = userService.listWeeklyActivityUser(startDate, endDate);
-        return list;
-    }
-
-    /**
-     * Get monthly active user
-     *
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    @RequestMapping(value = "/active/monthly", method = RequestMethod.GET)
-    public List<StatsMonthly> listMonthlyActivityUser(@RequestParam(value = "startDate") Integer startDate,
-                                                    @RequestParam(value = "endDate") Integer endDate) {
-        List<StatsMonthly> list = userService.listMonthlyActivityUser(startDate, endDate);
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public List<? extends Object> listDashboardInfo() {
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(new Date());
+        rightNow.add(Calendar.DAY_OF_MONTH, -1);
+        Integer endDate = Integer.parseInt(sdf.format(rightNow.getTime()));
+        rightNow.add(Calendar.DAY_OF_MONTH, -14);
+        Integer startDate = Integer.parseInt(sdf.format(rightNow.getTime()));
+        List<? extends Object> list = userService.listStatsInfo(startDate, endDate, 1);
         return list;
     }
 }

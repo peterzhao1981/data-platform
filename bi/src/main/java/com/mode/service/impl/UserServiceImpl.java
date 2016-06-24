@@ -32,9 +32,8 @@ public class UserServiceImpl implements UserService{
     private StatsMonthlyDao statsMonthlyDao;
 
     @Override
-    public List<StatsDaily> listUserRegister(Integer startDate, Integer endDate, Integer type) {
+    public List<? extends Object> listStatsInfo(Integer startDate, Integer endDate, Integer type) {
         List<StatsDaily> list = new ArrayList<StatsDaily>();
-
             if (type == 1) {
                 list = statsDailyDao.listStatsDailys(startDate, endDate, null, null, null);
                 return list;
@@ -46,22 +45,13 @@ public class UserServiceImpl implements UserService{
                 Integer newStartDate = calendarDao.getMonthFirstDay(startDate);
                 Integer newEndDate = calendarDao.getMonthLastDay(endDate);
                 list = statsDailyDao.listStatsMonthly(newStartDate, newEndDate);
+            } else if (type == 4) {
+                List<StatsWeekly> l = statsWeeklyDao.listWeeklyActivityUser(startDate, endDate);
+                return l;
+            } else if (type == 5) {
+                List<StatsMonthly> l = statsMonthlyDao.listMonthlyActivityUser(startDate, endDate);
+                return l;
             }
-
-        return list;
-    }
-
-    @Override
-    public List<StatsWeekly> listWeeklyActivityUser(Integer startDate, Integer endDate) {
-        List<StatsWeekly> list = new ArrayList<StatsWeekly>();
-        list = statsWeeklyDao.listWeeklyActivityUser(startDate, endDate);
-        return list;
-    }
-
-    @Override
-    public List<StatsMonthly> listMonthlyActivityUser(Integer startDate, Integer endDate) {
-        List<StatsMonthly> list = new ArrayList<StatsMonthly>();
-        list = statsMonthlyDao.listMonthlyActivityUser(startDate, endDate);
         return list;
     }
 }
