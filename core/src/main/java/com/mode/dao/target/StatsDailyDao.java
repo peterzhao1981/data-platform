@@ -176,5 +176,77 @@ public interface StatsDailyDao {
     public List<Integer> listToBeProcessedDates(@Param("columnName") String columnName,
                                                 @Param("endDate") Integer endDate);
 
+    /**
+     * List daily user register,order,gmv
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select b.weekend as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb,sum(a.new_user_yt) as newUserYt," +
+             "sum(`order`) as `order`,sum(gmv) as gmv,a.total_user,a.total_order,a.total_gmv from" +
+                    " md_stats_daily a  inner join " +
+             "md_calendar b on a.date=b.date ",
+            "<where>",
+            "<if test='startDate != null'> <![CDATA[ AND a.date >= #{startDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND a.date <= #{endDate} ]]> </if>",
+            "</where>",
+            "group by b.weekend ",
+            "</script>"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "date", column = "date"),
+            @Result(property = "newUser", column = "new_user"),
+            @Result(property = "newUserFb", column = "new_user_fb"),
+            @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "totalUser", column = "total_user"),
+            @Result(property = "activeUser", column = "active_user"),
+            @Result(property = "order", column = "order"),
+            @Result(property = "totalOrder", column = "total_order"),
+            @Result(property = "gmv", column = "gmv"),
+            @Result(property = "totalGmv", column = "total_gmv")})
+    public List<StatsDaily> listStatsWeekly(@Param("startDate") Integer startDate,
+                                            @Param("endDate") Integer endDate);
+
+
+    /**
+     * List monthly user register,order,gmv
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select b.month as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb," +
+                    "sum(a.new_user_yt) as newUserYt," +
+                    "sum(`order`) as `order`,sum(gmv) as gmv,a.total_user,a.total_order,a.total_gmv from" +
+                    " md_stats_daily a  inner join " +
+                    "md_calendar b on a.date=b.date ",
+            "<where>",
+            "<if test='startDate != null'> <![CDATA[ AND a.date >= #{startDate} ]]> </if>",
+            "<if test='endDate != null'> <![CDATA[ AND a.date <= #{endDate} ]]> </if>",
+            "</where>",
+            "group by b.month ",
+            "</script>"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "date", column = "date"),
+            @Result(property = "newUser", column = "new_user"),
+            @Result(property = "newUserFb", column = "new_user_fb"),
+            @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "totalUser", column = "total_user"),
+            @Result(property = "activeUser", column = "active_user"),
+            @Result(property = "order", column = "order"),
+            @Result(property = "totalOrder", column = "total_order"),
+            @Result(property = "gmv", column = "gmv"),
+            @Result(property = "totalGmv", column = "total_gmv")})
+    public List<StatsDaily> listStatsMonthly(@Param("startDate") Integer startDate,
+                                            @Param("endDate") Integer endDate);
+
 
 }

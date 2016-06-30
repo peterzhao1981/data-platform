@@ -1,14 +1,13 @@
 package com.mode.dao.target;
 
+import com.mode.entity.StatsWeekly;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
-
-import com.mode.entity.StatsDaily;
-import com.mode.entity.StatsWeekly;
 
 /**
  * Created by zhaoweiwei on 16/6/22.
@@ -63,6 +62,29 @@ public interface StatsWeeklyDao {
     })
     public List<Integer> listToBeProcessedDates(@Param("columnName") String columnName,
                                                 @Param("endDate") Integer endDate);
+
+    /**
+     * List weekly active user
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select * from md_stats_weekly ",
+            "<where>",
+            "<if test='endDate != null'>  <![CDATA[ AND date >= #{startDate} ]]> </if>",
+            "<if test='endDate != null'>  <![CDATA[ AND date <= #{endDate} ]]> </if>",
+            "</where>",
+            "</script>"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "date", column = "date"),
+            @Result(property = "activeUser", column = "active_user")})
+    public List<StatsWeekly> listWeeklyActivityUser(@Param("startDate") Integer startDate,
+                                                    @Param("endDate") Integer endDate);
 
 
 }
