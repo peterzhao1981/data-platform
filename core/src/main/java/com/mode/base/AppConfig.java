@@ -19,6 +19,9 @@ public class AppConfig {
     public static final String USER_SOURCE_FACEBOOK = "facebook";
     // User come from youtube
     public static final String USER_SOURCE_YOUTUBE = "youtube";
+    // User come from instagram
+    public static final String USER_SOURCE_INSTAGRAM = "instagram";
+
 
     // Stats type: daily
     public static final String STATS_TYPE_DAILY = "daily";
