@@ -127,6 +127,7 @@ public interface StatsDailyDao {
             @Result(property = "newUser", column = "new_user"),
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "newUserIn", column = "new_user_in"),
             @Result(property = "totalUser", column = "total_user"),
             @Result(property = "activeUser", column = "active_user"),
             @Result(property = "order", column = "order"),
@@ -186,7 +187,8 @@ public interface StatsDailyDao {
     @Select({
             "<script>",
             "select b.weekend as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb,sum(a.new_user_yt) as newUserYt," +
-             "sum(`order`) as `order`,sum(gmv) as gmv,a.total_user,a.total_order,a.total_gmv from" +
+             "sum(a.new_user_in) as newUserIn, sum(`order`) as `order`,sum(gmv) as gmv,a" +
+                    ".total_user,a.total_order,a.total_gmv from" +
                     " md_stats_daily a  inner join " +
              "md_calendar b on a.date=b.date ",
             "<where>",
@@ -202,6 +204,7 @@ public interface StatsDailyDao {
             @Result(property = "newUser", column = "new_user"),
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "newUserIn", column = "new_user_in"),
             @Result(property = "totalUser", column = "total_user"),
             @Result(property = "activeUser", column = "active_user"),
             @Result(property = "order", column = "order"),
@@ -222,7 +225,7 @@ public interface StatsDailyDao {
     @Select({
             "<script>",
             "select b.month as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb," +
-                    "sum(a.new_user_yt) as newUserYt," +
+                    " sum(a.new_user_in) as newUserIn ,sum(a.new_user_yt) as newUserYt," +
                     "sum(`order`) as `order`,sum(gmv) as gmv,a.total_user,a.total_order,a.total_gmv from" +
                     " md_stats_daily a  inner join " +
                     "md_calendar b on a.date=b.date ",
@@ -239,6 +242,7 @@ public interface StatsDailyDao {
             @Result(property = "newUser", column = "new_user"),
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "newUserIn", column = "new_user_in"),
             @Result(property = "totalUser", column = "total_user"),
             @Result(property = "activeUser", column = "active_user"),
             @Result(property = "order", column = "order"),

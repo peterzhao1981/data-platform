@@ -1,5 +1,7 @@
 package com.mode.api;
 
+import com.mode.entity.StatsCountry;
+import com.mode.entity.StatsHourlyRequest;
 import com.mode.service.UserService;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,6 +55,19 @@ public class UserApi {
         rightNow.add(Calendar.DAY_OF_MONTH, -14);
         Integer startDate = Integer.parseInt(sdf.format(rightNow.getTime()));
         List<? extends Object> list = userService.listStatsInfo(startDate, endDate, 1);
+        return list;
+    }
+
+    @RequestMapping(value = "/user/hour", method = RequestMethod.GET)
+    public StatsHourlyRequest getHourUser(@RequestParam(value = "date") Integer date) {
+        StatsHourlyRequest statsHourlyRequest = new StatsHourlyRequest();
+        statsHourlyRequest = userService.getHourUser(date);
+        return statsHourlyRequest;
+    }
+
+    @RequestMapping(value = "/user/country", method = RequestMethod.GET)
+    public List<StatsCountry> getStatsCountry() {
+        List<StatsCountry> list = userService.getStatsCountry();
         return list;
     }
 }

@@ -22,7 +22,7 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
     private static Logger LOG = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 
     @ResponseBody
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.OK)
     @ExceptionHandler(ModeException.class)
     public ErrorResponse handleModeException(Exception e) {
 

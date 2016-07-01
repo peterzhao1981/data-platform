@@ -15,6 +15,8 @@ public class StatsDaily {
     private Integer newUserFb;
     // Daily new  users from youtube count
     private Integer newUserYt;
+    // Daily new  users from instagram
+    private Integer newUserIn;
     // Total new users count
     private Integer totalUser;
     // Daily active users count
@@ -66,6 +68,14 @@ public class StatsDaily {
 
     public void setNewUserYt(Integer newUserYt) {
         this.newUserYt = newUserYt;
+    }
+
+    public Integer getNewUserIn() {
+        return newUserIn;
+    }
+
+    public void setNewUserIn(Integer newUserIn) {
+        this.newUserIn = newUserIn;
     }
 
     public Integer getTotalUser() {
