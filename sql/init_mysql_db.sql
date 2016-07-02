@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `mode_bi`.`md_stats_daily` (
   `new_user` INT(10) NULL DEFAULT NULL COMMENT 'Daily new users',
   `new_user_fb` INT(10) NULL DEFAULT NULL COMMENT 'Daily new facebook users',
   `new_user_yt` INT(10) NULL DEFAULT NULL COMMENT 'Daily new youtube users',
+  `new_user_ins` INT(10) NULL DEFAULT NULL COMMENT 'Daily new instagram users',
   `total_user` INT(10) NULL DEFAULT NULL COMMENT 'Total users',
   `active_user` INT(10) NULL DEFAULT NULL COMMENT 'Daily active users',
   `order` INT(10) NULL DEFAULT NULL COMMENT 'Daily order count',

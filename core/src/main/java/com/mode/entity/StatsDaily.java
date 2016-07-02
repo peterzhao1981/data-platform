@@ -13,10 +13,10 @@ public class StatsDaily {
     private Integer newUser;
     // Daily new users from facebook count
     private Integer newUserFb;
-    // Daily new  users from youtube count
+    // Daily new users from youtube count
     private Integer newUserYt;
-    // Daily new  users from instagram
-    private Integer newUserIn;
+    // Daily new users from instagram count
+    private Integer newUserIns;
     // Total new users count
     private Integer totalUser;
     // Daily active users count
@@ -70,12 +70,12 @@ public class StatsDaily {
         this.newUserYt = newUserYt;
     }
 
-    public Integer getNewUserIn() {
-        return newUserIn;
+    public Integer getNewUserIns() {
+        return newUserIns;
     }
 
-    public void setNewUserIn(Integer newUserIn) {
-        this.newUserIn = newUserIn;
+    public void setNewUserIns(Integer newUserIns) {
+        this.newUserIns = newUserIns;
     }
 
     public Integer getTotalUser() {

@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +59,8 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
     private final String STATS_NEW_USER_FB_COL_NAME = "new_user_fb";
 
     private final String STATS_NEW_USER_YT_COL_NAME = "new_user_yt";
+
+    private final String STATS_NEW_USER_INS_COL_NAME = "new_user_ins";
 
     private final String STATS_TOTAL_USER_COL_NAME = "total_user";
 
@@ -173,12 +177,15 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
                 Integer count = userDao.countUsers(null, startTs, endTs);
                 Integer fbCount = userDao.countUsers(AppConfig.USER_SOURCE_FACEBOOK, startTs, endTs);
                 Integer ytCount = userDao.countUsers(AppConfig.USER_SOURCE_YOUTUBE, startTs, endTs);
+                Integer insCount = userDao.countUsers(AppConfig.USER_SOURCE_INSTAGRAM, startTs,
+                        endTs);
                 Integer totalCount = userDao.countUsers(null, null, null);
                 StatsDaily statsDaily = new StatsDaily();
                 statsDaily.setDate(date);
                 statsDaily.setNewUser(count);
                 statsDaily.setNewUserFb(fbCount);
                 statsDaily.setNewUserYt(ytCount);
+                statsDaily.setNewUserIns(insCount);
                 statsDaily.setTotalUser(totalCount);
                 statsDailyDao.updateStatsDaily(statsDaily);
             }
@@ -320,8 +327,6 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
 
                     statsHourlyRequestDao.updateStatsHourlyRequest(statsHourlyRequest);
                 }
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -330,11 +335,12 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
 
     }
 
-//    public static void main(String[] args) throws Exception {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-//        df.setTimeZone(TimeZone.getTimeZone("GMT+7:00"));
-//        System.out.println(df.parse(df.format(1464192000000l)));
-//
-//
+//    public static void main(String[] args) {
+//        Pattern p = Pattern.compile("(\\w+)(\\w+)");
+//        Matcher matcher = p.matcher("onecattwocatsintheyard");
+//        System.out.println(matcher.groupCount());
+//        while(matcher.find()) {
+//            System.out.println(matcher.group(2));
+//        }
 //    }
 }

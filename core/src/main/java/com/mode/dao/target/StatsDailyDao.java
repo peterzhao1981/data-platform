@@ -23,10 +23,10 @@ public interface StatsDailyDao {
      * @param statsDaily
      * @return
      */
-    @Insert("INSERT INTO md_stats_daily (date, new_user, new_user_fb, new_user_yt, total_user, " +
-            "active_user, `order`, total_order, gmv, total_gmv) " +
-            "VALUES (#{date}, #{newUser}, #{newUserFb}, #{newUserYt}, #{totalUser}, " +
-            "#{activeUser}, #{order}, #{totalOrder}, #{gmv}, #{totalGmv})")
+    @Insert("INSERT INTO md_stats_daily (date, new_user, new_user_fb, new_user_yt, new_user_ins " +
+            "total_user, active_user, `order`, total_order, gmv, total_gmv) " +
+            "VALUES (#{date}, #{newUser}, #{newUserFb}, #{newUserYt}, #{newUserIns}, " +
+            "#{totalUser}, #{activeUser}, #{order}, #{totalOrder}, #{gmv}, #{totalGmv})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
     public Integer createStatsDaily(StatsDaily statsDaily);
@@ -44,6 +44,7 @@ public interface StatsDailyDao {
             "<if test='newUser != null'> new_user = #{newUser}, </if>",
             "<if test='newUserFb != null'> new_user_fb = #{newUserFb}, </if>",
             "<if test='newUserYt != null'> new_user_yt = #{newUserYt}, </if>",
+            "<if test='newUserIns != null'> new_user_ins = #{newUserIns}, </if>",
             "<if test='totalUser != null'> total_user = #{totalUser}, </if>",
             "<if test='activeUser != null'> active_user = #{activeUser}, </if>",
             "<if test='order != null'> order = #{order}, </if>",
@@ -73,6 +74,7 @@ public interface StatsDailyDao {
             "<if test='newUser != null'> AND new_user = #{newUser} </if>",
             "<if test='newUserFb != null'> AND new_user_fb = #{newUserFb} </if>",
             "<if test='newUserYt != null'> AND new_user_yt = #{newUserYt} </if>",
+            "<if test='newUserIns != null'> AND new_user_ins = #{newUserIns}, </if>",
             "<if test='totalUser != null'> AND total_user = #{totalUser} </if>",
             "<if test='activeUser != null'> AND active_user = #{activeUser} </if>",
             "<if test='order != null'> AND order = #{order} </if>",
@@ -90,6 +92,7 @@ public interface StatsDailyDao {
             @Result(property = "newUser", column = "new_user"),
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
+            @Result(property = "newUserIns", column = "new_user_ins"),
             @Result(property = "totalUser", column = "total_user"),
             @Result(property = "activeUser", column = "active_user"),
             @Result(property = "order", column = "order"),
@@ -127,7 +130,7 @@ public interface StatsDailyDao {
             @Result(property = "newUser", column = "new_user"),
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
-            @Result(property = "newUserIn", column = "new_user_in"),
+            @Result(property = "newUserIns", column = "new_user_ins"),
             @Result(property = "totalUser", column = "total_user"),
             @Result(property = "activeUser", column = "active_user"),
             @Result(property = "order", column = "order"),
@@ -187,7 +190,7 @@ public interface StatsDailyDao {
     @Select({
             "<script>",
             "select b.weekend as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb,sum(a.new_user_yt) as newUserYt," +
-             "sum(a.new_user_in) as newUserIn, sum(`order`) as `order`,sum(gmv) as gmv,a" +
+             "sum(a.new_user_ins) as newUserIns, sum(`order`) as `order`,sum(gmv) as gmv,a" +
                     ".total_user,a.total_order,a.total_gmv from" +
                     " md_stats_daily a  inner join " +
              "md_calendar b on a.date=b.date ",
@@ -204,7 +207,7 @@ public interface StatsDailyDao {
             @Result(property = "newUser", column = "new_user"),
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
-            @Result(property = "newUserIn", column = "new_user_in"),
+            @Result(property = "newUserIns", column = "new_user_ins"),
             @Result(property = "totalUser", column = "total_user"),
             @Result(property = "activeUser", column = "active_user"),
             @Result(property = "order", column = "order"),
@@ -225,7 +228,7 @@ public interface StatsDailyDao {
     @Select({
             "<script>",
             "select b.month as date,sum(a.new_user) as newUser,sum(a.new_user_fb) as newUserFb," +
-                    " sum(a.new_user_in) as newUserIn ,sum(a.new_user_yt) as newUserYt," +
+                    " sum(a.new_user_ins) as newUserIns ,sum(a.new_user_yt) as newUserYt," +
                     "sum(`order`) as `order`,sum(gmv) as gmv,a.total_user,a.total_order,a.total_gmv from" +
                     " md_stats_daily a  inner join " +
                     "md_calendar b on a.date=b.date ",
@@ -242,7 +245,7 @@ public interface StatsDailyDao {
             @Result(property = "newUser", column = "new_user"),
             @Result(property = "newUserFb", column = "new_user_fb"),
             @Result(property = "newUserYt", column = "new_user_yt"),
-            @Result(property = "newUserIn", column = "new_user_in"),
+            @Result(property = "newUserIns", column = "new_user_ins"),
             @Result(property = "totalUser", column = "total_user"),
             @Result(property = "activeUser", column = "active_user"),
             @Result(property = "order", column = "order"),

@@ -130,14 +130,14 @@ project(':bi') {
         // SpringFox API Doc tool, which includes Google Guava Library.
         // Go to localhost:8080/v2/api-docs to verify the JSON response, with large number of
         // key-value pairs.
-        compile ("io.springfox:springfox-swagger2:${springFoxVersion}")
+        compile("io.springfox:springfox-swagger2:${springFoxVersion}")
         // Swagger UI is a built-in solution which makes user interaction with the
         // Swagger-generated API documentation much easier.
         // Go to localohost:8080/swagger-ui.html for the api docs.
-        compile ("io.springfox:springfox-swagger-ui:${springFoxVersion}")
+        compile("io.springfox:springfox-swagger-ui:${springFoxVersion}")
 
         // ElasticSearch
-        compile "org.elasticsearch:elasticsearch:${elasticSearchVersion}"
+        compile("org.elasticsearch:elasticsearch:${elasticSearchVersion}")
 
         // Runtime Java EE Container - Tomcat
         providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
@@ -150,3 +150,4 @@ project(':bi') {
 //        testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
     }
 }
+
