@@ -1,0 +1,1742 @@
+
+
+/* GENERAL */
+
+
+.mainAreaContainer
+{
+	text-align:left;
+}
+
+.mainAreaContainer .title
+{
+	font-family:Arial, Verdana, Helvetica, sans-serif;
+	font-size:20px;
+}
+
+.mainAreaContainer h2.title
+{
+	font-weight:normal;
+	margin-bottom:5px;
+}
+
+.mainAreaContainer div.titleRight
+{
+	color:#202020;
+	font-family:Arial, Verdana, Helvetica, sans-serif;
+	font-weight:normal;
+	font-size:11px;
+	position:absolute;
+	right:0px;
+	top:8px;
+}
+
+
+.mainAreaContainer .contentBar
+{
+	background-color:#464646;
+	height:33px;
+	line-height:33px;
+	color:#e9e9e9;
+	font-weight:bold;
+	padding:2px;
+	padding-left:10px;
+	font-size:14px;
+	z-index:900;
+}
+
+.mainAreaContainer .contentBar #pageHeaderName
+{
+	z-index:60;
+	height:inherit;
+	overflow:hidden;
+	margin-right:20px;
+}
+.mainAreaContainer .contentBar .absoluteRightMargined
+{
+	top:2px;
+	font-size:10px;
+	z-index:900;
+}
+
+
+.mainAreaContainer .contentBarAlt
+{
+	background-color:#CCCCCC;
+	color:#333333;
+	border:1px solid #CCCCCC;
+}
+
+.mainAreaContainer .borderChartAlt
+{
+	border:1px solid #CCCCCC;
+	border-top:0px;
+	padding:15px;
+	overflow:hidden;
+	text-align:center;
+	margin:0px auto;
+	margin-bottom:20px;
+	zoom:1;
+}
+
+.mainAreaContainer .content
+{
+	background-color:#f2f2f2;
+	padding:10px;
+	display:block;
+}
+.mainAreaContainer div.content.filled
+{
+	background-color:#e9e9e9;
+	padding:10px;
+}
+
+.contentForm
+{
+	width:765.0px;
+	padding-left:127.5px;
+	margin:10px auto;
+	padding-top:10px;
+}
+
+.contentForm .label
+{
+	float:left; 
+	margin-right:10px;
+	width:150px;
+	border-width:0px;
+	text-align:right;
+	line-height:20px;
+	font-weight:bold;
+}
+
+.contentForm .inputText
+{
+	width:250px;
+	display:inline;
+	margin:0px;
+	padding:0px;
+}
+
+.contentForm .inputText_noWidth
+{
+	display:inline;
+	margin:0px;
+	padding:0px;
+}
+
+.contentForm .inputText_secondLine
+{
+	padding-left:160px;
+	border-width:0px;
+}
+
+.contentForm .smallText
+{
+	font-size:10px;
+	font-weight:normal;
+	text-decoration:underline;
+}
+
+.contentForm .clearBoth
+{
+	clear:both;
+	border-width:0px;
+}
+
+#actionErrors ul
+{
+	color:#d42323;
+	font-weight:bold;
+	list-style-type:none;
+}
+
+.contentForm ul
+{
+	margin:10px auto;
+	list-style-type:none;
+}
+
+.formActionError ul
+{
+	margin:10px auto;
+	list-style-type:none;
+	color:#d42323;
+	font-weight:bold;
+}
+
+.contentForm .yui-ac-container ul
+{
+	color:#202020;
+}
+
+
+/* denotes required fields */
+.red_asterisk
+{
+	color:#d42323;
+}
+.clear_asterisk
+{
+	visibility:hidden;
+}
+
+.wwerr
+{
+	position:relative;
+	zoom:1;
+	top:0px;
+	left:0px;
+}
+
+.wwerr .errorMessage
+{
+	text-align:left;
+	color:#d42323;
+	font-weight:bold;
+	position:absolute;
+	top:3px;
+	left:425px;
+	width:300px;
+}
+
+.filledArea .wwerr .errorMessage
+{
+	position:relative;
+	top:0px;
+	left:0px;
+}
+
+.filledArea .contentForm
+{
+	width:600px;
+	padding-left:20px;
+	text-align:left;
+}
+
+.filledArea .contentForm .label
+{
+	width:150px;
+	font-size:10px;
+	font-weight:bold;
+	color:#333333;
+}
+
+.filledArea .contentForm .inputText
+{
+	margin-top:0px;
+}
+
+.filledArea .contentForm .inputText_justText
+{
+	position:relative;
+	left:0px;
+	top:-1px;
+	line-height:20px;
+	height:20px;
+	font-size:13px;
+	font-weight:bold;
+}
+
+.filledArea .contentForm .inputText_secondLine
+{
+	padding-left:170px;
+}
+
+
+/* IE 7 HACK */
+html>body .wwerr .errorMessage
+{ 
+     *left:270px; 
+}
+
+.formActionError ul
+{
+	padding:0px;
+}
+
+.formActionError li
+{
+	padding-left:160px;
+}
+
+#actionErrors ul, #actionErrors li, .formActionError ul, .formActionError li
+{
+	list-style-type:none;
+}
+
+.chartArea
+{
+	margin:20px auto;
+}
+
+.chartArea .borderChart
+{
+	border:1px solid #CCCCCC;
+	padding:15px;
+	padding-top:25px;
+	overflow:auto;
+	text-align:center;
+	margin:0px auto;
+	margin-bottom:20px;
+	zoom:1;
+}
+
+.borderChart .fusionChart
+{
+	height:320px;
+}
+
+.half .borderChart .fusionChart
+{
+	height:240px;
+}
+
+.chartArea .chartBottom
+{
+	margin-bottom:20px;
+}
+
+.chartArea .filledArea
+{
+	background-color:#f2f2f2;
+	border:1px solid #CCCCCC;
+	padding:15px;
+	overflow-x:auto;
+	margin:0px auto;
+	margin-bottom:20px;
+	zoom:1;
+
+}
+
+.chartArea .filledArea hr
+{
+	color:#f2f2f2;
+	background-color:#f2f2f2;
+	border-bottom:1px dotted #CCCCCC;
+	border-style:none none dotted;
+	margin:10px 0px;
+}
+
+.chartArea .filledArea .subFilledArea
+{
+	background-color:#ffffff;
+	border:1px solid #f2f2f2;
+	padding:15px;
+	overflow-x:auto;
+	margin:0px auto;
+	margin-top:10px;
+	zoom:1;
+
+}
+
+.noChart .borderChart
+{
+	padding-top:15px;
+	text-align:left;
+}
+
+.noBorder .borderChart
+{
+	border-width:0px;
+}
+
+.chartArea .halfChart
+{
+	margin:0px auto;
+	margin-bottom:20px;
+}
+
+.chartArea .title
+{
+	border:1px solid #CCCCCC;
+	border-bottom-width:0px;
+	background-color:#f2f2f2;
+	color:#464646;
+	padding:5px;
+	zoom:1;
+	line-height:20px;
+}
+
+.chartArea .title select
+{
+	font-size:11px;
+	padding:2px;
+	font-weight:bold;
+	vertical-align:middle;
+	margin-left:5px;
+}
+
+.chartArea .chartBottom .bottomBar
+{
+	border:1px solid #CCCCCC;
+	border-top-width:0px;
+	padding:5px 10px;
+	background-color:#f2f2f2;
+	line-height:20px;
+	vertical-align:middle;
+}
+
+.noBorder .title
+{
+	border-width:0px;
+}
+.chartArea .title .inner
+{
+	padding:2px;
+	padding-left:5px;
+	font-size:13px;
+	font-weight:bold;
+	line-height:20px;
+}
+
+.chartArea .title .inner span.basic
+{
+
+}
+
+.chartArea .halfChart .title
+{
+	margin-top:0px;
+}
+
+.chartArea .zoomDiv, .chartArea .zoomLikeDiv
+{
+	font-size:10px;
+	height:20px;
+	line-height:20px;
+	vertical-align:top;
+}
+
+.chartArea .zoomDiv.chartSwitcher
+{
+	top:5px;
+}
+.chartArea .zoomDiv.chartSwitcher img
+{
+	vertical-align:middle;
+	position:relative;
+	top:-3px;
+}
+
+.chartArea .halfChart .borderChart
+{
+	margin-bottom:0px;
+}
+
+.chartArea .geoZoomDiv
+{
+    position:relative;
+    font-size:10px;
+    height:20px;
+    line-height:20px;
+    vertical-align:top;
+    float:right;
+}
+
+.chartArea .geoSelectsDiv
+{
+    position:relative;
+    font-size:10px;
+    height:100%;
+    line-height:20px;
+    vertical-align:top;
+    float: left;
+}
+
+.innerRight
+{
+	font-size:10px;
+	font-weight:normal;
+	line-height:20px;
+	height:20px;
+	padding:2px;
+	padding-right:10px;
+	position:absolute;
+	right:0px;
+	top:0px;
+	zoom:1;
+	vertical-align:middle;
+}
+
+.chartArea .title .innerRight
+{
+	margin:6px 0px;
+}
+.chartArea .bottomBar .innerRight
+{
+	margin:3px 0px;
+}
+
+.chartArea .leftHalf
+{
+	text-align:left;
+	width:618px;
+}
+
+.chartArea .rightHalf
+{
+	text-align:left;
+	width:299px;
+	position:absolute;
+	top:0px;
+	left:319px;
+}
+
+.chartArea .spark
+{
+	vertical-align:middle;
+	margin:10px;
+	width:80px;
+	height:40px;
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+}
+
+.chartArea .sparkDiv
+{
+	width:179px;
+	vertical-align:middle;
+}
+
+.chartArea .sparkFunnelBorder
+{
+	border-top:1px solid #CCCCCC;
+	margin-top:15px;
+}
+
+.chartArea .sparkFunnelBorder .sparkFunnel
+{
+	text-align:center;
+	padding:7px;
+	padding-top:15px;
+}
+
+.chartArea .sparkFunnelBorder .sparkFunnel .sparkConversion
+{
+	text-align:center;
+	vertical-align:middle;
+	padding:7px;
+}
+
+.chartArea .sparkNumber
+{
+	font-size:17px;
+	font-weight:bold;
+	color:#202020;
+	line-height:20px;
+	text-align:center;
+}
+.chartArea .sparkType
+{
+	font-size:14px;
+	font-weight:bold;
+	color:#464646;
+	line-height:18px;
+	display:block;
+}
+
+.chartArea .title .inner .sparkDiv
+{
+	width:100%;
+	height:16px;
+	position:relative;
+	top:-5px;
+}
+
+.chartArea .title .inner .sparkNumber
+{
+	font-size:15px;
+	line-height:20px;
+}
+.chartArea .title .inner .sparkType
+{
+	position:relative;
+	width:50%;
+	line-height:20px;
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+	font-size:13px;
+}
+
+.mapReturn
+{
+	padding:10px;
+	padding-top:2px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	zoom:1;
+	margin:0px;
+	text-align:left;
+}
+
+.geoBreakdownNote
+{
+	padding:10px;
+	padding-top:2px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	zoom:1;
+	margin:0px;
+	text-align:left;
+}
+
+.fancyTable
+{
+	font-size:10px;
+}
+.fancyTable th
+{
+	font-size:12px;
+	font-weight:bold;
+	border-bottom:2px solid #666666;
+}
+.fancyTable td
+{
+	font-size:11px;
+	font-weight:normal;
+	border-bottom:1px dotted #666666;
+}
+.fancyTable td.last
+{
+	border-bottom-width:0px;
+}
+
+.chartNavArea
+{
+	height:100%;
+	background-color:#e9e9e9;
+	border:1px solid #CCCCCC;
+}
+
+.chartRightNavArea
+{
+	height:100%;
+}
+
+.chartRightNavArea .chartArea
+{
+	border:1px solid #e9e9e9;
+	margin:0px;
+	margin-bottom:20px;
+}
+
+.chartRightNavArea .chartArea .title
+{
+	border:0px;
+	border-bottom:1px solid #e9e9e9;
+	background-color:#f2f2f2;
+	color:#333333;
+}
+
+.chartRightNavArea .chartArea .title .inner
+{
+	font-size:15px;
+	text-align:center;
+}
+
+.chartLeftArea .chartArea .title .inner
+{
+	font-size:15px;
+	font-weight:bold;
+}
+
+.chartRightNavArea .chartArea .borderChart
+{
+	border:0px;
+	padding:10px;
+	margin-bottom:0px;
+}
+
+.chartRightArea
+{
+	margin-left:219px;
+	display:block;
+}
+
+.chartLeftArea
+{
+	margin-right:219px;
+	display:block;
+}
+.chartLeftArea .content .chartArea .title
+{
+	border:1px solid #e9e9e9;
+	border-bottom:0px;
+}
+.chartLeftArea .content .chartArea .borderChart
+{
+	border:1px solid #e9e9e9;
+}
+
+
+.chartRightArea .content, .chartLeftArea .content, .analyticsSection .content
+{
+	background-color:#ffffff;
+}
+
+.analyticsSection .content
+{
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.chartDropDown
+{
+	z-index:999;
+	background-color:#f2f2f2;
+	border:1px solid #CCCCCC;
+	border-top:0px;
+	color:#666666;
+	position:absolute;
+	right:1px;
+	top:35px;
+	width:180px;
+	text-align:left;
+	font-size:11px;
+	font-weight:bold;
+	line-height:15px;
+}
+
+.chartDropDown .paddedRow
+{
+	border-bottom:1px solid #CCCCCC;
+	padding:10px;
+	position:relative;
+}
+
+.chartDropDown .paddedRow .rowInput
+{
+	position:absolute;
+	top:8px;
+	left:10px;
+	width:20px;
+}
+
+.chartDropDown .paddedRow .rowText
+{
+	margin-left:18px;
+}
+
+.chartDropDown .paddedRow .rowText label
+{
+	font-size:11px;
+	font-weight:bold;
+	color: #666666;
+	cursor:pointer;
+	width:auto;
+	line-height:15px;
+	margin-left:0px;
+}
+
+.chartDropDown .childText
+{
+	margin-left:10px;
+	margin-top:5px;
+}
+
+.chartDropDown .noSearchResults
+{
+	font-weight:bold;
+	color:#999999;
+	font-style:italic;
+}
+
+.chartDropDown .scrollableSublist
+{
+	margin-top:5px;
+	max-height:160px;
+	overflow:auto;
+	overflow-x:hidden;
+	overflow-y:auto;
+	margin-left:8px;
+	padding-left:10px;
+	margin-bottom:5px;
+}
+
+.chartDropDown .submitRow
+{
+	background-color:#e9e9e9;
+	padding:10px;
+	text-align:center;
+}
+
+.chartDropDown input
+{
+	vertical-align:middle;
+}
+.chartDropDown img
+{
+	vertical-align:middle;
+}
+
+.chartDropDownTextDiv
+{
+	/* start display:inline-block */
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+	/* end display:inline-block */
+	width:160px;
+	text-align:right;
+	z-index:999;
+}
+
+div.chartDropDownTextDiv .textName
+{
+	width:140px;
+	height:33px;
+	line-height:33px;
+}
+
+.chartDropDownTextDiv label
+{
+	vertical-align:middle;
+}
+
+.chartDropDownTextDiv div a.colorWhite
+{
+	font-size:11px;
+}
+
+.chartDropDownTextDiv .submitRow input
+{
+	margin-right:5px;
+}
+
+#calDivContainer
+{
+	z-index:999;
+	padding-left:5px;
+	margin-top:5px;
+}
+
+#calDivContainer .calDivLabel
+{
+	margin-left:20px;
+	font-size:10px;
+	width:33px;
+	margin-top:1px;
+	margin-right:3px;
+	text-align:right;
+}
+
+.calButtonDiv
+{
+	z-index:999;
+}
+
+.chartDropDownTextDiv .filterInput
+{
+	color:#464646;
+}
+.chartDropDownTextDiv .filterInput.textPrefill
+{
+	color:#999999;
+}
+
+.dropDownDiv 
+{
+	z-index:999;
+}
+.dropDownActiveTab, .dropDownSubmenu
+{
+	line-height:21px;
+	font-weight:bold;
+	cursor:pointer;
+	color:#464646;
+	font-size:13px;
+}
+
+.dropDownActiveTab
+{
+	padding:5px 7px;
+	border:1px solid #CCCCCC;
+	border-bottom-width:0px;
+	background-color:#f2f2f2;
+	font-size:13px;
+}
+.titleDropDown
+{
+	z-index:999;
+	border-bottom-width:1px;
+}
+
+.dropDownActiveTab span
+{
+	cursor:pointer;
+}
+
+.dropDownSubmenu
+{
+	z-index:999;
+	position:absolute;
+	top:0px;
+	left:0px;
+	border:1px solid #CCCCCC;
+	background-color:#f2f2f2;
+	color:#48696c;	
+	font-size:13px;
+	padding:6px 7px;
+}
+.titleDropDownSubmenu
+{
+	border-top-width:0px;
+	max-height:300px;
+	overflow:auto;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+
+.dropDownActiveTab, .dropDownSubmenu
+{
+	min-width:220px;
+	width:440px;
+	max-width:75%;
+}
+
+.dropDownSubmenu div
+{
+	padding:7px;
+	border-bottom:1px solid #f2f2f2;
+	cursor:pointer;
+}
+
+.dropDownSubmenu div.activeDropDown
+{
+	background-color:#3b86d2;
+	border-color:#3b86d2;
+	color:#ffffff;
+}
+
+.dropDownSubmenu div.overDropDown, 
+.dropDownSubmenu div.overDropDown.activeDropDown, 
+.dropDownSubmenu div.overDropDown.inactiveDropDown
+{
+	background-color:#71aed8;
+	border-color:#71aed8;
+	color:#ffffff;
+}
+
+
+.dropDownSubmenu div.inactiveDropDown
+{
+	background-color:#ffffff;
+	color:#666666;	
+	border-bottom:1px solid #f2f2f2;
+}
+
+.dropDownActiveTab .arrowDiv, .dropDownActiveTab .arrowOverDiv, .dropDownActiveTab .arrowDownDiv
+{
+	position:absolute;
+	border:1px solid #CCCCCC;
+	top:-1px;
+	right:-1px;
+	width:25px;
+	padding:5px 6px;
+	text-align:center;
+}
+
+.dropDownActiveTab img
+{
+	height:16px;
+	width:16px;
+	border-width:0px;
+	line-height:25px;
+	position:relative;
+	top:2px;
+}
+
+.dropDownActiveTab, .dropDownActiveTab span
+{
+	height:24px;
+	line-height:24px;
+}
+
+.buttonBox
+{
+	border:1px solid #CCCCCC;
+	cursor:pointer;
+}
+
+.dropDownActiveTab .arrowDiv, .buttonBox
+{
+	background-color:#f2f2f2;
+	border-color:#CCCCCC;
+}
+.buttonBox, .buttonBox img, .titleDropDown, .dropDownActiveTab
+{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.titleDropDown span, .dropDownActiveTab span
+{
+	-webkit-touch-callout: text;
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+
+.dropDownActiveTab .arrowOverDiv, .buttonBox.over, .buttonBox.normal:hover
+{
+	background-color:#e9e9e9;
+	border-color:#a6a6a6;
+}
+
+.dropDownActiveTab .arrowDownDiv, .buttonBox.down
+{
+	background-color:#e9e9e9;
+	border-color:#a6a6a6;
+	-moz-box-shadow:    inset 0px 2px 3px 1px rgba(00, 00, 00, .1);
+	-webkit-box-shadow: inset 0px 2px 3px 1px rgba(00, 00, 00, .1);
+	box-shadow:         inset 0px 2px 3px 1px rgba(00, 00, 00, .1);
+}
+
+.contentBar .buttonBox
+{
+	background-color:#464646;
+	border-color:#464646;
+}
+.contentBar .buttonBox.over, .contentBar .buttonBox.normal:hover,
+.contentBar .buttonBox.down 
+{
+	background-color:#333333;
+	border-color:#333333;
+}
+
+.arrowDiv, .arrowOverDiv, .arrowDiv *, .arrowOverDiv *, .buttonBox *
+{
+	cursor:pointer;
+}
+
+.dropDownActiveTab span
+{
+	font-size:13px;
+}
+
+.chartArea .chartTitle .innerRight
+{
+	margin:6px 0px;
+}
+
+.half .chartArea .chartTitle .innerRight a span
+{
+	display:none;
+}
+
+
+/** Help CSS **/
+.help
+{	
+	padding: 10px;
+	margin-top:20px;
+	background-color:#fffcaf;
+	border:1px solid #CCCCCC;
+	display: none;
+	font-size:11px;
+}
+
+.help .question
+{
+	font-weight: bold;
+	font-size:13px;
+}
+
+.help .explanation
+{
+
+}
+
+.viewProject th
+{
+	border-bottom:1px solid #666666;
+	font-size:12px;
+	font-weight:bold;
+	color:#666666;
+}
+.viewProject .noBorder
+{
+	border-bottom-width:0px;
+}
+.viewProject td
+{
+	border-bottom:1px solid #ffffff;
+}
+
+.accountingSummaryActionOption {
+	background-color:#fffcaf;
+	border:1px solid #CCCCCC;
+	margin-top:10px;
+	margin-bottom:10px;
+	padding:10px
+}
+
+.accountingSummaryActionOption div:first-child {
+	width:510px;height:26px;display:table-cell;vertical-align:middle;
+}
+
+#drillDownWarning
+{
+	margin-top:-20px;
+	margin-bottom:20px;
+	text-align:right;
+	font-size:10px;
+	font-weight:normal;
+	display:none;
+	
+}
+
+.filledArea .formTitle
+{
+	color:#202020;
+	font-weight:bold;
+	font-size:12px;
+	padding-right:10px;
+}
+
+.filledArea .formHint
+{
+	color:#666666;
+	font-size:10px;
+	font-weight:normal;
+}
+
+.filledArea .inputText
+{
+	width:250px;
+	margin-top:10px;
+	font-size:11px;
+	font-weight:normal;
+	padding:1px;
+}
+
+.filledArea select.inputText
+{
+	width:255px;
+}
+
+.filledArea .subFilledArea .inputText
+{
+	width:230px;
+}
+
+.filledArea .subFilledArea select.inputText
+{
+	width:235px;
+}
+
+.filledArea .inputRadio
+{
+	padding:0px;
+	margin:0px;
+	line-height:12px;
+	margin-top:5px;
+}
+
+.filledArea label
+{
+	vertical-align:middle;
+	line-height:12px;
+	color:#333333;
+	position:relative;
+	top:-4px;
+	left:4px;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.filledArea .chartArea .filledArea .subFilledArea
+{
+	margin-bottom:5px;
+}
+
+.filledArea .alignActive, .alignBase
+{
+	cursor:pointer;
+}
+
+div.arrowMenu
+{
+	z-index:99;
+	vertical-align:middle;
+}
+
+.blueArrow, .blueArrowOver, .blueArrowPlain
+{
+	padding:0px;
+	margin:0px 7px;
+	width:19px;
+	height:27px;
+	line-height:40px;
+	vertical-align:middle;
+	position:relative;
+	top:-4px;
+	cursor:pointer;
+}
+
+.blueArrow, .blueArrowPlain 
+{
+	background-image:url('/images/ui/a_arrow_old.gif');
+}
+
+.blueArrowOver 
+{
+	background-image:url('/images/ui/a_arrow_over_old.png');
+}
+
+.blueArrowPlain
+{
+	cursor:default;
+}
+
+div.arrowSubMenu
+{
+	z-index:99;
+	position:absolute;
+	top:26px;
+	left:0px;
+	border:1px solid #CCCCCC;
+	background-color:#f2f2f2;
+	padding:5px;
+	width:315px;
+	list-style-type: none;
+	margin:0px;
+	display:none;
+}
+
+div.arrowSubMenu a
+{
+	background-color:white;
+	background-image:none;
+	padding:5px;
+	margin:0px;
+	display:block;
+	line-height:14px;
+	height:14px;
+	margin-bottom:1px;
+	display:block;
+	color:#666666;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+div.arrowSubMenu a:hover, div.arrowSubMenu a.active:hover
+{
+	background-color:#71aed8;
+	color:#ffffff;
+}
+
+div.arrowSubMenu a.active
+{
+	background-color:#3b86d2;
+	color:#ffffff;
+} 
+
+.blueArrowClicked div.arrowSubMenu
+{
+	display:block;
+}
+
+.projectBreadCrumbBigPlatformIcon
+{
+	vertical-align:middle;
+	position:relative;
+	top:-6px;
+	line-height:30px;
+}
+
+/* little spark-like boxes next to charts. see audience_{age,gender} for examples */
+ul.skinnyChartNeighbor {
+	float:right;
+	text-align:left;
+	width:180px;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+.skinnyChart
+{
+	margin-right:180px;
+}
+ul.skinnyChartNeighbor li {
+	margin:0px 0px 10px 0px;
+	padding:7px 10px;
+	border:1px solid #CCCCCC;
+	list-style-type:none;
+}
+
+ul.skinnyChartNeighbor li.noBorder {
+	border-width:0px;
+}
+ul.skinnyChartNeighbor span  {
+	text-align:left !important;
+}
+ul.skinnyChartNeighbor li.nameDiv span {
+	font-size:20px;
+	font-weight:bold;
+}
+ul.skinnyChartNeighbor li span.sparkNumber {
+	font-size:12px;
+}
+.weak {
+	font-weight:bold !important;
+	font-size:12px !important;
+	color:#666666 !important;
+}
+
+.bulletPointsBlue
+{
+	margin:20px 0px;
+	margin-top:0px;
+}
+
+.bulletPointsBlue h4
+{
+	line-height:30px;
+	margin:0px;
+}
+
+.bulletPointsBlue .imageIcon
+{
+	background-image:url(/images/ui/roundNumberButton.gif);
+	color:#ffffff;
+	width:30px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	font-size:16px;
+	font-weight:bold;
+	margin-right:5px;
+	vertical-align:middle;
+}
+
+.bulletPoints
+{
+	margin:20px 0px;
+	margin-top:0px;
+	color:#999999;
+}
+
+.bulletPoints h4
+{
+	line-height:30px;
+	margin:0px;
+	color:#333333;
+}
+
+.bulletPoints .imageIcon
+{
+	background-image:url(/images/ui/roundNumberButtonGrey.gif);
+	color:#ffffff;
+	width:30px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	font-size:16px;
+	font-weight:bold;
+	margin-right:5px;
+	vertical-align:middle;
+}
+
+.sectionHeader
+{
+	font-size:16px;
+	font-weight:bold;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+}
+
+
+.paginationTop, .paginationBot
+{
+	text-align:center;
+	margin-bottom:5px
+}
+
+.borderChart.noTopBorder
+{
+	border-top-width:0px;
+}
+
+/* half charts that scale with resize! */
+.halfContainer
+{
+	width:100%;
+}
+
+.halfContainer .left, .halfContainer .right
+{
+	width:50%;
+
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	vertical-align:top;
+	*display:inline;
+}
+.halfContainer .left .half
+{
+	margin-right:10px;
+}
+.halfContainer .right .half
+{
+	margin-left:10px;
+}
+
+.move, .moveable
+{
+	cursor:move;
+}
+.drag, .draggable
+{
+	cursor:pointer;
+}
+
+.yui-ac-container .platformIconImg
+{
+	vertical-align:middle;
+	margin-right:4px;
+	position:relative;
+	top:-1px;
+}
+
+.yui-ac-container .yui-ac-bd ul li span.iconed
+{
+	position:relative;
+	top:2px;
+}
+
+a.blockLink
+{
+	padding:2px 5px;
+	background-color:#666666;
+	color:#e9e9e9;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	text-decoration:none;
+	margin-left:5px;
+	font-size:9px;
+}
+
+a.blockLink:hover
+{
+	background-color:#999999;
+	color:#464646;
+}
+
+.userConfigInputElement 
+{
+	font-size:12px;
+	width:250px;
+	cursor:pointer;
+}
+
+.detailsBox .borderChart
+{
+	padding-top:15px;
+	background-color:#f2f2f2;
+	text-align:left;
+}
+.detailsBox .borderChart.normalColor
+{
+	background-color:transparent;
+}
+			
+.detailsBox .borderChart div.cell
+{
+	margin-bottom:5px;
+}
+			
+.detailsBox .borderChart div.cell span.key
+{
+	font-size:12px;
+	font-weight:bold;
+	color:#666666;
+}
+			
+.detailsBox .borderChart div.cell span.value
+{
+	font-size:12px;
+	font-weight:normal;
+	color:#333333;
+}
+
+.detailsBox .borderChart .closeIcon
+{
+	position:absolute;
+	top:10px;
+	right:10px;
+	cursor:pointer;
+}
+
+.detailsBox .borderChart .blockLink.editLink
+{
+	position:absolute;
+	top:10px;
+	right:30px;
+	cursor:pointer;
+}
+
+.sliderToggle
+{
+	overflow:hidden;
+	position:relative;
+	
+}
+.sliderToggle .wrapper
+{
+	position:relative;
+	top:0px;
+}
+.sliderToggle .stButton
+{
+	position:absolute;
+	top:0px;
+	z-index:2;
+	text-align:center;
+	overflow:hidden;
+	background: #e9e9e9 url(/images/ui/buttons/borderless.png) repeat-x left -34px;
+}
+.sliderToggle .stButton.over
+{
+	background-position:left -2px;
+}
+.sliderToggle .stButton.down, 
+.sliderToggle.disabled .stButton, .sliderToggle.disabled .stButton.over
+{
+	background-position:left -66px;
+}
+.sliderToggle .stButton, .sliderToggle .stButton *
+{
+	cursor:pointer;
+}
+.sliderToggle .stButton img
+{
+	vertical-align:middle;
+}
+.sliderToggle .stLeft
+{
+	background-color:#71aed8;
+	color:#ffffff;
+	
+	font-weight:bold;
+	vertical-align:middle;
+	text-align:center;
+	
+	position:absolute;
+	top:0px;
+	z-index:1;
+	left:0px;
+}
+.sliderToggle .stRight
+{
+	color:#333333;
+	
+	font-weight:bold;
+	vertical-align:middle;
+	text-align:center;
+	
+	position:absolute;
+	top:0px;
+	z-index:1;
+}
+
+.selectContainer
+{
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.selectContainer .selectPrefix
+{
+    float: left;
+    width: 40px;
+    margin-right: 3px;
+}
+
+.selectButton
+{
+    margin-bottom: 5px;
+}
+
+
+/* UPDATES */
+.mainAreaContainer .contentBar
+{
+	background-color:#ffffff;
+	color:#000000;
+}
+
+.mainAreaContainer .contentBar #pageHeaderName
+{
+	z-index:60;
+	height:inherit;
+	overflow:hidden;
+	margin-right:20px;
+}
+.mainAreaContainer .contentBar .absoluteRightMargined
+{
+	top:2px;
+	font-size:10px;
+	z-index:900;
+}
+
+.contentBar .buttonBox
+{
+	background-color:#ffffff;
+	border-color:#464646;
+}
+
+.contentBar .buttonBox.over, .contentBar .buttonBox.normal:hover,
+.contentBar .buttonBox.down 
+{
+	background-color:#ffffff;
+	border-color:#333333;
+}
+
+.chartArea .title
+{
+	background-color:#ffffff;
+}
+
+.chartArea .chartTitle
+{
+	border:1px solid #CCCCCC;
+	border-bottom: 0px;
+}
+
+.chartArea .chartTitle .title
+{
+	border: 0px;
+}
+
+.chartArea .borderChart
+{
+	border-top-width:0px;
+}
+
+#filterMsg
+{
+	border-top-width:1px;
+}
+
+.chartDropDown,
+body #container #header .headerChooser .dropDownDiv
+{
+	border-top:1px solid #CCCCCC;
+	background-color: #ffffff;
+}
+
+.chartDropDown .submitRow
+{
+	padding-bottom: 15px;
+	text-align:right;
+}
+
+.chartDropDown .submitRow a
+{
+	font-size: 12px;
+	line-height: 24px;
+	margin-right: 10px;
+}
+
+
+.chartDropDown .paddedRow .rowText label
+{
+	font-weight:normal;
+	color: #424242;
+}
+
+.dropDownActiveTab, .dropDownSubmenu
+{
+	color:#727272;
+	min-width:1px;
+}
+
+.dropDownSubmenu
+{
+	padding: 0px;
+}
+
+.dropDownSubmenu div
+{
+	padding: 7px 10px;
+}
+
+.bold.activeLink
+{
+	font-weight: bold;
+}
+
+.titleDropDownSubmenu
+{
+	min-width:220px;
+}
+
+.dropDownActiveTab,
+div.arrowSubMenu
+{
+	border: 0px;
+	background-color:#ffffff;
+}
+
+.dropDownActiveTab .arrowDiv, .buttonBox, .dropDownActiveTab .arrowOverDiv, .buttonBox.over, .buttonBox.normal:hover
+{
+	background-color:#ffffff;
+	border-color:#CCCCCC;
+	border-right:0px;
+	border-left:0px;
+	border-bottom:0px;
+}
+
+.blueArrow, .blueArrowOver, .blueArrowPlain {
+	background-image: none;
+	height: 100%;
+	color:#424242;
+	top: -2px;
+	margin: 0px 10px 0px 20px;
+}
+
+.blueArrow:before,
+.blueArrowOver:before,
+.blueArrowPlain:before
+{
+	font-family: 'Flurry';
+	content: '\e601';
+}
+
+.chartDropDownTextDiv .submitRow input
+{
+	margin-right:20px;
+}
+
+/* MAINTAIN OLD FFP STYLE */
+.mainAreaContainer.noRefresh .contentBar 
+{
+	background-color:#464646;
+	color:#e9e9e9;
+}
+
+.borderChart.noTitle
+{
+	border-top-width:1px;
+}

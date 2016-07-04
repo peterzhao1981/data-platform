@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<!-- Apply our angular app to our site -->
+<html ng-app="modeApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode|Shooping With Stylist</title>
+
+    <!-- Bootstrap and Fonts -->
+    <link href="styles/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/bootstrap/header-default.css" rel="stylesheet">
+    <link href="styles/bootstrap/style.css" rel="stylesheet">
+    <link href="styles/bootstrap/animate.css" rel="stylesheet">
+    <!-- <link href="styles/bootstrap/login.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="styles/bootstrap/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="styles/bootstrap/line-icons.css"> -->
+
+    <link href="styles/custom.css" rel="stylesheet">
+
+	<!-- Google chart css -->
+    <link href="scripts/vendor/chart/tooltip.css" rel="stylesheet" type="text/css">
+
+    <link href="scripts/vendor/datepicker/angular-datepicker.css" rel="stylesheet" type="text/css">
+
+    <!-- flurry css -->
+    <link href="styles/flurry/common.uirefresh.css" rel="stylesheet" type="text/css">
+    <link href="styles/flurry/ui.uirefresh.css" rel="stylesheet" type="text/css">
+    
+</head>
+
+<body>
+
+<!-- Main view, this is where we will inject our content -->
+<div ui-view></div>
+
+<!-- 3rd party scripts -->
+    <script src="scripts/vendor/jquery/jquery-2.1.1.min.js"></script>
+    <script src="scripts/vendor/sha/sha256.js"></script>
+    <script src="scripts/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Main Angular scripts-->
+    <script src="scripts/vendor/angular/angular.min.js"></script>
+    <script src="scripts/vendor/angular/angular-cookies.js"></script>
+    <script src="scripts/vendor/ui-router/angular-ui-router.min.js"></script>
+
+    <!-- Anglar App Script -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config/config.js"></script>
+    <script src="scripts/directive/directive.js"></script>
+    <script src="scripts/service/service.js"></script>
+    <script src="scripts/controller/controller.js"></script>
+    <script src="scripts/controller/summaryCtrl.js"></script>
+    <script src="scripts/controller/userNewCtrl.js"></script>
+    <script src="scripts/controller/userActiveCtrl.js"></script>
+    <script src="scripts/controller/userRetentionCtrl.js"></script>
+    <script src="scripts/controller/orderCountCtrl.js"></script>
+    <script src="scripts/controller/orderGmvCtrl.js"></script>
+    <script src="scripts/controller/postActionCtrl.js"></script>
+
+    <!-- google chart js -->
+    <script src="scripts/vendor/chart/jsapi.js"></script>
+    <script src="scripts/vendor/chart/format.js"></script>
+    <script src="scripts/vendor/chart/table.js"></script>
+
+    <script src="scripts/vendor/datepicker/angular-datepicker.js"></script>
+
+    <script src="scripts/vendor/jsonToExcel/jsonToExcel.js"></script>
+    <script src="scripts/custom.js"></script>
+</body>
+</html>

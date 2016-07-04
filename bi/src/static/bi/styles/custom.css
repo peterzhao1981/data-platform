@@ -1,0 +1,39 @@
+/*
+	modify the custom css
+*/
+
+.headfontsize {
+	margin-top: 25px;
+	font-size: 24px;
+	font-weight: bold;;
+}
+
+.templatemo-bg-gray { 
+	background-color: #eee; 
+}
+.templatemo-container {
+	background-color: rgba(255,255,255,0.8);
+	border: 1px solid #dedede;
+	border-radius: 8px;
+	margin: 0 auto;
+	padding: 30px;
+}
+.templatemo-login-form-1 { max-width: 500px; }
+.templatemo-login-form-1 a { color: gray; }
+.templatemo-login-form-1 a:hover {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+/* remove list dot */
+li {
+	list-style-type:none;
+}
+/* draw table function text */
+.center-text {
+    text-align: center;
+  }
+  /* tnable date font size */
+ label {
+	font-size: 10px;
+ }

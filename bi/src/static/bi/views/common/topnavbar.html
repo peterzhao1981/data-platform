@@ -1,0 +1,72 @@
+<div class="wrapper">
+    <div class="header">
+        <div class="container">
+            <!-- <a class="logo" ui-sref="dashboard.summary">
+                <img src="images/mode_logo.jpg" alt="Logo" width="90" height="90">
+            </a> -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse" style="margin-left:30px;margin-bottom:30px;">
+                <div class="container row">
+                    <div class="col-md-3">
+                        <a class="logo" href="javascript:void(0);">
+                            <img src="images/mode_logo.jpg" alt="Logo" width="90" height="90" style="">
+                        </a>
+                    </div>
+                    <div class="topbar">
+                        <ul class="loginbar pull-right">
+                            <li><a href="page_login.html">Log out</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <ul class="nav navbar-nav">
+                            <li class="headliheight" style="height:150px;width:200px;">
+                                <a ui-sref="dashboard.summary" class="dropdown-toggle headfontsize" data-toggle="dropdown" >
+                                    Summary
+                                </a>
+                            </li>
+                            <li class="dropdown headliheight" style="height:150px;width:200px;">
+                                <a href="javascript:void(0);" class="dropdown-toggle headfontsize" data-toggle="dropdown" >
+                                    User
+                                </a>
+                                <ul class="dropdown-menu" style="position:static;">
+                                    <li><a ui-sref="user.register">New Users</a></li>
+                                    <li>
+                                        <a ui-sref="user.active">Active Users</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="user.retention">Retnetion Users</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown headliheight" style="height:150px;width:200px;">
+                                <a href="javascript:void(0);" class="dropdown-toggle headfontsize" data-toggle="dropdown" >
+                                    Post
+                                </a>
+                                <ul class="dropdown-menu" style="position:static;">
+                                    <li><a ui-sref="post.action">Action</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown headliheight" style="height:150px;width:200px;">
+                                <a href="javascript:void(0);" class="dropdown-toggle headfontsize" data-toggle="dropdown" >
+                                    Order
+                                </a>
+                                <ul class="dropdown-menu" style="position:static;">
+                                    <li><a ui-sref="order.count">Order count</a></li>
+                                    <li>
+                                        <a ui-sref="order.gmv">Order Gmv</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
