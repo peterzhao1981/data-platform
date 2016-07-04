@@ -7,9 +7,11 @@ function postActionCtrl($scope, $http) {
 	 	
 	 	$scope.start = $scope.start.replace(/\s+/g,"");
 	 	var textStartDate = $scope.start.substring(0,4) + "/" + $scope.start.substring(4,6) + "/" +$scope.start.substring(6,8);
+	 	startIntDate = parseInt($scope.start);
 
 	 	$scope.end = $scope.end.replace(/\s+/g,"");
 	 	var textEndDate = $scope.end.substring(0,4) + "/" + $scope.end.substring(4,6) + "/" +$scope.end.substring(6,8);
+	 	endDate = parseInt($scope.end);
 
 
 	 	if (startIntDate > endDate) {
@@ -17,7 +19,7 @@ function postActionCtrl($scope, $http) {
 	 		return;
 	 	};
 	 	
-	 	$scope.getOrderCount(startTimeStamp, endTimeStamp);
+	 	$scope.getOrderCount(startIntDate, endDate);
 	 	document.getElementById("strSearchDate").innerHTML= textStartDate + "-" + textEndDate;
 	 }
 
@@ -34,11 +36,11 @@ function postActionCtrl($scope, $http) {
 	 $scope.searchLastDay = function( count ) {
 	 	// init search date the last day to last 15 day
 	 	var myDate = new Date();
-	 	endDate = myDate.getTime();
+	 	//endDate = myDate.getTime();
 	 	//return;
 
 	 	var startDate = new Date(myDate.getTime() - count * 24 * 3600 * 1000);
-	 	startIntDate = startDate.getTime();
+	 	//startIntDate = startDate.getTime();
 	 	
 	 	var startMonth = startDate.getMonth() + 1;
 
@@ -57,7 +59,7 @@ function postActionCtrl($scope, $http) {
 	 	startDateStr = startDate.getFullYear().toString() + startMonthStr + startDayStr;
 	 	var textStartDate = startDate.getFullYear().toString() + "/" + startMonthStr + "/" +startDayStr;
 
-	 	//startIntDate = parseInt(startDateStr);
+	 	startIntDate = parseInt(startDateStr);
 
 
 	 	var month = myDate.getMonth() + 1;
@@ -75,7 +77,7 @@ function postActionCtrl($scope, $http) {
 	 	dateStr = myDate.getFullYear().toString()+monthStr+dayStr;
 	 	var textEndDate = myDate.getFullYear().toString() + "/" + monthStr + "/" +dayStr;
 
-	 	//endDate = parseInt(dateStr);
+	 	endDate = parseInt(dateStr);
 	 	document.getElementById("strSearchDate").innerHTML= textStartDate + "-" + textEndDate;
 
 	 	$scope.getOrderCount(startIntDate, endDate);
@@ -85,7 +87,7 @@ function postActionCtrl($scope, $http) {
 	$scope.getOrderCount = function(startDate, endDate) {
 		var req = {
 			method:"GET",
-			url : API_URI_ENDPOINT + "/posts?startDate=" + startDate + "&endDate=" + endDate + "&query=country",
+			url : API_URI_ENDPOINT + "/stats?startDate=" + startDate + "&endDate=" + endDate + "&query=post",
 		}
 		$http(req)
 		.success(function(response){
