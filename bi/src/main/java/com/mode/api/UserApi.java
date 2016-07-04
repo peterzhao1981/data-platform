@@ -40,15 +40,16 @@ public class UserApi {
                                              Integer endDate,
                                              @RequestParam(value= "query", required = false) String query,
                                              @RequestParam(value = "type", required = false) Integer type)
-                                            throws ParseException {
+            throws ParseException {
         List<? extends Object> list = new ArrayList<Object>();
+        List<Long> list1 = new ArrayList<Long>();
         if (query.equals("user")) {
             list = userService.listStatsInfo(startDate, endDate, type);
         } else if (query.equals("country")) {
             list = userService.getStatsCountry();
         } else if (query.equals("post")) {
             Long start = sdf.parse(String.valueOf(startDate)).getTime();
-            Long end = sdf.parse(String.valueOf(startDate)).getTime();
+            Long end = sdf.parse(String.valueOf(endDate)).getTime();
             list = userService.getStatsPost(start, end);
         }
         return list;

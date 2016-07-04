@@ -1,6 +1,7 @@
 package com.mode.service.impl;
 
 import com.mode.base.Message;
+import com.mode.config.AppConfig;
 import com.mode.dao.source.PostDao;
 import com.mode.dao.source.UserActionLogDao;
 import com.mode.dao.target.CalendarDao;
@@ -54,24 +55,24 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<? extends Object> listStatsInfo(Integer startDate, Integer endDate, Integer type) {
         List<StatsDaily> list = new ArrayList<StatsDaily>();
-            if (type == 1) {
+            if (type == AppConfig.LIST_STATS_DAILY) {
                 list = statsDailyDao.listStatsDailys(startDate, endDate, null, null, null);
                 return list;
-            } else if (type == 2){
+            } else if (type == AppConfig.LIST_STATS_WEEKLY){
                 Integer newStartDate = calendarDao.getWeekFirstDay(startDate);
                 Integer newEndDate = calendarDao.getWeekLastDay(endDate);
                 list = statsDailyDao.listStatsWeekly(newStartDate, newEndDate);
-            } else if (type == 3) {
+            } else if (type == AppConfig.LIST_STATS_MONTHLY) {
                 Integer newStartDate = calendarDao.getMonthFirstDay(startDate);
                 Integer newEndDate = calendarDao.getMonthLastDay(endDate);
                 list = statsDailyDao.listStatsMonthly(newStartDate, newEndDate);
-            } else if (type == 4) {
+            } else if (type == AppConfig.LIST_ACTIVE_USER_WEEKLY) {
                 List<StatsWeekly> l = statsWeeklyDao.listWeeklyActivityUser(startDate, endDate);
                 if (l == null || l.isEmpty()) {
                     throw new ModeException(Message.NO_MORE_DATA);
                 }
                 return l;
-            } else if (type == 5) {
+            } else if (type == AppConfig.LIST_ACTIVE_USER_MONTHLY) {
                 List<StatsMonthly> l = statsMonthlyDao.listMonthlyActivityUser(startDate, endDate);
                 if (l == null || l.isEmpty()) {
                     throw new ModeException(Message.NO_MORE_DATA);
