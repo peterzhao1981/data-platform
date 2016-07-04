@@ -1,15 +1,17 @@
 package com.mode.service.impl;
 
 import com.mode.base.Message;
+import com.mode.dao.source.PostDao;
+import com.mode.dao.source.UserActionLogDao;
 import com.mode.dao.target.CalendarDao;
 import com.mode.dao.target.StatsCountryDao;
 import com.mode.dao.target.StatsDailyDao;
 import com.mode.dao.target.StatsHourlyRequestDao;
 import com.mode.dao.target.StatsMonthlyDao;
 import com.mode.dao.target.StatsWeeklyDao;
+import com.mode.entity.Post;
 import com.mode.entity.StatsCountry;
 import com.mode.entity.StatsDaily;
-import com.mode.entity.StatsHourlyRequest;
 import com.mode.entity.StatsMonthly;
 import com.mode.entity.StatsWeekly;
 import com.mode.exception.ModeException;
@@ -42,6 +44,12 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private StatsCountryDao statsCountryDao;
+
+    @Autowired
+    private PostDao postDao;
+
+    @Autowired
+    private UserActionLogDao userActionLogDao;
 
     @Override
     public List<? extends Object> listStatsInfo(Integer startDate, Integer endDate, Integer type) {
@@ -77,20 +85,23 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public StatsHourlyRequest getHourUser(Integer date) {
-        StatsHourlyRequest statsHourlyRequest = new StatsHourlyRequest();
-        statsHourlyRequest = statsHourlyRequestDao.getStatsHourlyRequest(date);
-        if (statsHourlyRequest == null) {
-            throw new ModeException(Message.NO_MORE_DATA);
-        }
-        return statsHourlyRequest;
-    }
-
-    @Override
     public List<StatsCountry> getStatsCountry() {
         List<StatsCountry> list = statsCountryDao.listCountryUser();
         if (list == null || list.isEmpty()) {
             throw new ModeException(Message.NO_MORE_DATA);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Post> getStatsPost(Long startDate, Long endDate) {
+        List<Post> list = postDao.getStatsPost(startDate, endDate);
+        if (list == null || list.isEmpty()) {
+            throw new ModeException(Message.NO_MORE_DATA);
+        }
+        for (Post tmp : list) {
+            Integer postId = tmp.getId();
+            tmp.setViews(userActionLogDao.countPostViews(postId));
         }
         return list;
     }

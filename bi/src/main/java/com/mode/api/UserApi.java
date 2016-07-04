@@ -1,9 +1,9 @@
 package com.mode.api;
 
-import com.mode.entity.StatsCountry;
-import com.mode.entity.StatsHourlyRequest;
 import com.mode.service.UserService;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,10 +34,23 @@ public class UserApi {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<? extends Object> listStatsInfo(@RequestParam(value = "startDate") Integer startDate,
-                                             @RequestParam(value = "endDate") Integer endDate,
-                                             @RequestParam(value = "type") Integer type) {
-        List<? extends Object> list = userService.listStatsInfo(startDate, endDate, type);
+    public List<? extends Object> listStatsInfo(@RequestParam(value = "startDate", required = false)
+                                                    Integer startDate,
+                                             @RequestParam(value = "endDate", required = false)
+                                             Integer endDate,
+                                             @RequestParam(value= "query", required = false) String query,
+                                             @RequestParam(value = "type", required = false) Integer type)
+                                            throws ParseException {
+        List<? extends Object> list = new ArrayList<Object>();
+        if (query.equals("user")) {
+            list = userService.listStatsInfo(startDate, endDate, type);
+        } else if (query.equals("country")) {
+            list = userService.getStatsCountry();
+        } else if (query.equals("post")) {
+            Long start = sdf.parse(String.valueOf(startDate)).getTime();
+            Long end = sdf.parse(String.valueOf(startDate)).getTime();
+            list = userService.getStatsPost(start, end);
+        }
         return list;
     }
 
@@ -55,19 +68,6 @@ public class UserApi {
         rightNow.add(Calendar.DAY_OF_MONTH, -14);
         Integer startDate = Integer.parseInt(sdf.format(rightNow.getTime()));
         List<? extends Object> list = userService.listStatsInfo(startDate, endDate, 1);
-        return list;
-    }
-
-    @RequestMapping(value = "/user/hour", method = RequestMethod.GET)
-    public StatsHourlyRequest getHourUser(@RequestParam(value = "date") Integer date) {
-        StatsHourlyRequest statsHourlyRequest = new StatsHourlyRequest();
-        statsHourlyRequest = userService.getHourUser(date);
-        return statsHourlyRequest;
-    }
-
-    @RequestMapping(value = "/user/country", method = RequestMethod.GET)
-    public List<StatsCountry> getStatsCountry() {
-        List<StatsCountry> list = userService.getStatsCountry();
         return list;
     }
 }

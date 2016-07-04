@@ -1,7 +1,7 @@
 package com.mode.service;
 
+import com.mode.entity.Post;
 import com.mode.entity.StatsCountry;
-import com.mode.entity.StatsHourlyRequest;
 import java.util.List;
 
 /**
@@ -19,7 +19,19 @@ public interface UserService {
      */
     public List<? extends Object> listStatsInfo(Integer startDate, Integer endDate, Integer type);
 
-    public StatsHourlyRequest getHourUser(Integer date);
-
+    /**
+     * List Stats country by users
+     *
+     * @return
+     */
     public List<StatsCountry> getStatsCountry();
+
+    /**
+     * List post view, like, comment etc
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public List<Post> getStatsPost(Long startDate, Long endDate);
 }
