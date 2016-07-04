@@ -88,7 +88,6 @@ function summaryCtrl($scope, $http) {
       	}
 	     var options = {
 			height : "300",
-			//title : 'User Active',
 			legend: { position: 'none' },
 			vAxis: {
 		        title: 'Number of Active Users'
@@ -106,22 +105,26 @@ function summaryCtrl($scope, $http) {
 
 	function drawNewUser() {
 		var length = $scope.newUserData.length;
-	 
-	 	var data = google.visualization.arrayToDataTable([
-		 ['Month', 'newUser', 'newUserFb', 'newUserYt', 'newUserIns'],
-		 [intDateToString($scope.newUserData[0].date),$scope.newUserData[0].newUser,$scope.newUserData[0].newUserFb,$scope.newUserData[0].newUserYt,$scope.newUserData[0].newUserIns]
-		]);
-      	for (var i = 1; i < length; i++) {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Month');
+		data.addColumn('number', 'newUser');
+		data.addColumn('number', 'newUserFb');
+		data.addColumn('number', 'newUserYt');
+		data.addColumn('number', 'newUserIns');
+
+		for (var i = 0; i < length; i++) {
 	        if (i % 2 == 0) {
 	          data.addRows([
 	            [intDateToString($scope.newUserData[i].date), $scope.newUserData[i].newUser, $scope.newUserData[i].newUserFb,$scope.newUserData[i].newUserYt,$scope.newUserData[i].newUserIns]
 	          ]);
-	        } else {
+	        } 
+	        else {
 	          data.addRows([
 	            ["", $scope.newUserData[i].newUser, $scope.newUserData[i].newUserFb,$scope.newUserData[i].newUserYt,$scope.newUserData[i].newUserIns]
 	          ]);
 	        }
       	}
+
 	    var total = $scope.newUserData[length-1].totalUser;
 	    var options = {
 			height : "300",
@@ -132,7 +135,7 @@ function summaryCtrl($scope, $http) {
 		    hAxis: {
 		        title: 'Date'
 		    },
-		    interpolateNulls : 'true',
+		    interpolateNulls : 'absolute',
 		};
         var chart = new google.visualization.LineChart(document.getElementById('chart_new'));
         chart.draw(data, options);
@@ -170,36 +173,36 @@ function summaryCtrl($scope, $http) {
   	}
 
 
-  	$scope.getActiveUsersCountry = function() {
-	      	var req = {
-	      		method : "GET",
-	      		url : API_URI_ENDPOINT + "/stats?query=country"
-	      	}
-	      	$http(req)
-	      	.success(function(response) {
-	      		$scope.countryData = response;
-	      		google.charts.setOnLoadCallback(drawRegionsMap());
-	      	})
-	    }
+  	// $scope.getActiveUsersCountry = function() {
+	  //     	var req = {
+	  //     		method : "GET",
+	  //     		url : API_URI_ENDPOINT + "/stats?query=country"
+	  //     	}
+	  //     	$http(req)
+	  //     	.success(function(response) {
+	  //     		$scope.countryData = response;
+	  //     		google.charts.setOnLoadCallback(drawRegionsMap());
+	  //     	})
+	  //   }
 
-      function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable([
-          ['Country', 'Popularity'],
-          [$scope.countryData[0].country.toString(),$scope.countryData[0].total]
-        ]);
-        for (var i = 1; i < $scope.countryData.length; i++) {
-        	//var array = [$scope.countryData[i].country,$scope.countryData[i].total];
-        	data.addRows([[$scope.countryData[i].country.toString(),$scope.countryData[i].total]]);
-        };
-        //console.log(data)
-        var options = {
-        	height:300,
-        	interpolateNulls : 'true',
-        };
-        var chart = new google.visualization.GeoChart(document.getElementById('chart_div2'));
-        chart.draw(data, options);
-      }
-    	$scope.getActiveUsersCountry();
+   //    function drawRegionsMap() {
+   //      var data = google.visualization.arrayToDataTable([
+   //        ['Country', 'Popularity'],
+   //        [$scope.countryData[0].country.toString(),$scope.countryData[0].total]
+   //      ]);
+   //      for (var i = 1; i < $scope.countryData.length; i++) {
+   //      	//var array = [$scope.countryData[i].country,$scope.countryData[i].total];
+   //      	data.addRows([[$scope.countryData[i].country.toString(),$scope.countryData[i].total]]);
+   //      };
+   //      //console.log(data)
+   //      var options = {
+   //      	height:300,
+   //      	interpolateNulls : 'true',
+   //      };
+   //      var chart = new google.visualization.GeoChart(document.getElementById('chart_div2'));
+   //      chart.draw(data, options);
+   //    }
+   //  	$scope.getActiveUsersCountry();
    $scope.jsonToExcelCountry = function() {
     JSONToCSVConvertor($scope.countryData, "newUserCountry", true);
   }
