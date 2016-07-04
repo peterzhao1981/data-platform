@@ -135,12 +135,15 @@ function orderGmvCtrl($scope, $http) {
 	function drawLineChart(space) {
 	 	var length = $scope.data.length;
 	 
-	 	var data = google.visualization.arrayToDataTable([
-		 ['Month', 'Order'],
-		 [intDateToString($scope.data[0].date),$scope.data[0].gmv]
-		]);
+	 // 	var data = google.visualization.arrayToDataTable([
+		//  ['Month', 'Order'],
+		//  [intDateToString($scope.data[0].date),$scope.data[0].gmv]
+		// ]);
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Month');
+		data.addColumn('number', 'orderGmv');
 	    if (space == 1) {
-	    	for(var i = 1;i < length; i++) {
+	    	for(var i = 0;i < length; i++) {
 	      		if (i%2 == 0) {
 	      			data.addRows([[intDateToString($scope.data[i].date),$scope.data[i].gmv]]);
 	      		} else {
@@ -148,7 +151,7 @@ function orderGmvCtrl($scope, $http) {
 	      		}
 		    }
 	    } else {
-	    	for(var i = 1;i < length; i++) {
+	    	for(var i = 0;i < length; i++) {
 	      		data.addRows([[intDateToString($scope.data[i].date),$scope.data[i].gmv]]);
 		    }
 	    }

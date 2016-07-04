@@ -138,13 +138,16 @@ function activeUserCtrl($scope, $http) {
 	}
 	function drawLineChart(space) {
 	 	var length = $scope.data.length;
+	 	var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Month');
+		data.addColumn('number', 'activeUser');
 	 
-	 	var data = google.visualization.arrayToDataTable([
-		 ['Month', 'active user'],
-		 [intDateToString($scope.data[0].date),$scope.data[0].activeUser]
-		]);
+	 // 	var data = google.visualization.arrayToDataTable([
+		//  ['Month', 'active user'],
+		//  [intDateToString($scope.data[0].date),$scope.data[0].activeUser]
+		// ]);
 	    if (space == 1) {
-	    	for(var i = 1;i < length; i++) {
+	    	for(var i = 0;i < length; i++) {
 	      		if (i%2 == 0) {
 	      			data.addRows([[intDateToString($scope.data[i].date),$scope.data[i].activeUser]]);
 	      		} else {
@@ -152,7 +155,7 @@ function activeUserCtrl($scope, $http) {
 	      		}
 		    }
 	    } else {
-	    	for(var i = 1;i < length; i++) {
+	    	for(var i = 0;i < length; i++) {
 	      		data.addRows([[intDateToString($scope.data[i].date),$scope.data[i].activeUser]]);
 		    }
 	    }
