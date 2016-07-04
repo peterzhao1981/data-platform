@@ -30,7 +30,6 @@ public class PostServiceImpl implements PostService{
         for (Post tmp : list) {
             Integer postId = tmp.getId();
             tmp.setViews(userActionLogDao.countPostViews(postId));
-            tmp.setRelatedItem(postDao.getCountRelatedProduct(postId));
         }
         return list;
     }

@@ -32,10 +32,4 @@ public interface PostDao {
     public List<Post> getStatsPost(@Param("startDate") Long startDate,
                                    @Param("endDate") Long endDate);
 
-    @Select({
-            "<script>",
-            "select count(*) from md_related_product where post_id = #{postId}",
-            "</script>"
-    })
-    public Integer getCountRelatedProduct(@Param("postId") Integer postId);
 }
