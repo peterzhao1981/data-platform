@@ -35,7 +35,7 @@ hs_err_pid*
 
 # Images CSS JS
 assets
-
+images
 
 # Shell script
 .sh
