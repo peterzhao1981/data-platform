@@ -141,13 +141,31 @@ function newUserCtrl($scope, $http) {
 
   function drawLineChart(space) {
     var length = $scope.data.length;
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Month');
+    data.addColumn('number', 'newUser');
+    data.addColumn('number', 'newUserFb');
+    data.addColumn('number', 'newUserYt');
+    data.addColumn('number', 'newUserIns');
+    // for (var i = 0; i < length; i++) {
+    //     if (i % 2 == 0) {
+    //       data.addRows([
+    //         [intDateToString($scope.newUserData[i].date), $scope.newUserData[i].newUser, $scope.newUserData[i].newUserFb,$scope.newUserData[i].newUserYt,$scope.newUserData[i].newUserIns]
+    //       ]);
+    //     } 
+    //     else {
+    //       data.addRows([
+    //         ["", $scope.newUserData[i].newUser, $scope.newUserData[i].newUserFb,$scope.newUserData[i].newUserYt,$scope.newUserData[i].newUserIns]
+    //       ]);
+    //     }
+    //   }
 
-    var data = google.visualization.arrayToDataTable([
-      ['Date', 'new user','new userFb', 'new userYt','new userIns'],
-      [intDateToString($scope.data[0].date), $scope.data[0].newUser, $scope.data[0].newUserFb,$scope.data[0].newUserYt,$scope.data[0].newUserIns]
-    ]);
+    // var data = google.visualization.arrayToDataTable([
+    //   ['Date', 'new user','new userFb', 'new userYt','new userIns'],
+    //   [intDateToString($scope.data[0].date), $scope.data[0].newUser, $scope.data[0].newUserFb,$scope.data[0].newUserYt,$scope.data[0].newUserIns]
+    // ]);
     if (space == 1) {
-      for (var i = 1; i < length; i++) {
+      for (var i = 0; i < length; i++) {
         if (i % 2 == 0) {
           data.addRows([
             [intDateToString($scope.data[i].date), $scope.data[i].newUser, $scope.data[i].newUserFb,$scope.data[i].newUserYt,$scope.data[i].newUserIns]
@@ -159,7 +177,7 @@ function newUserCtrl($scope, $http) {
         }
       }
     } else {
-      for (var i = 1; i < length; i++) {
+      for (var i = 0; i < length; i++) {
         data.addRows([
           [intDateToString($scope.data[i].date), $scope.data[i].newUser, $scope.data[i].newUserFb,$scope.data[i].newUserYt,$scope.data[i].newUserIns]
         ]);
