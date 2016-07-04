@@ -26,6 +26,8 @@ public enum Message {
     TIMEOUT(408, "Request Timeout"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 
+    NO_MORE_DATA(23, "No more data"),
+
     /*
      * User related errors (account, profile, VIP, social): 1 - 49.
      */

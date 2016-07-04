@@ -1,14 +1,13 @@
 package com.mode.dao.target;
 
+import com.mode.entity.StatsMonthly;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
-
-import com.mode.entity.StatsMonthly;
-import com.mode.entity.StatsWeekly;
 
 /**
  * Created by zhaoweiwei on 16/6/22.
@@ -65,5 +64,26 @@ public interface StatsMonthlyDao {
                                                 @Param("endDate") Integer endDate);
 
 
-
+    /**
+     * List Monthly active user
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select * from md_stats_monthly ",
+            "<where>",
+            "<if test='endDate != null'>  <![CDATA[ AND date >= #{startDate} ]]> </if>",
+            "<if test='endDate != null'>  <![CDATA[ AND date <= #{endDate} ]]> </if>",
+            "</where>",
+            "</script>"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "date", column = "date"),
+            @Result(property = "activeUser", column = "active_user")})
+    public List<StatsMonthly> listMonthlyActivityUser(@Param("startDate") Integer startDate,
+                                                      @Param("endDate") Integer endDate);
 }

@@ -65,6 +65,62 @@ public interface CalendarDao {
             @Result(property = "endTs", column = "end_ts")})
     public Calendar getCalendar(Integer date);
 
+    /**
+     * Get the week's first day
+     *
+     * @param startDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select date  from md_calendar where weekend = (select weekend from md_calendar where" +
+                    " date = #{startDate}) limit 1",
+            "</script>"
+    })
+    public Integer getWeekFirstDay(@Param("startDate") Integer startDate);
+
+    /**
+     * Get a week last day
+     *
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select date  from md_calendar where weekend = (select weekend from md_calendar where" +
+                    " date = #{endDate}) order by id desc limit 1",
+            "</script>"
+    })
+    public Integer getWeekLastDay(@Param("endDate") Integer endDate);
+
+    /**
+     * Get a month first day
+     *
+     * @param startDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select date  from md_calendar where month = (select month from md_calendar where" +
+                    " date = #{startDate}) limit 1",
+            "</script>"
+    })
+    public Integer getMonthFirstDay(@Param("startDate") Integer startDate);
+
+    /**
+     * Get a month last day
+     *
+     * @param endDate
+     * @return
+     */
+    @Select({
+            "<script>",
+            "select date  from md_calendar where weekend = (select month from md_calendar where" +
+                    " date = #{endDate}) order by id desc limit 1",
+            "</script>"
+    })
+    public Integer getMonthLastDay(@Param("endDate") Integer endDate);
+
 
     /**
      * List weekends from startDate to endDate.
