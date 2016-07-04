@@ -1,0 +1,211 @@
+<div class="row" ng-controller="activeUserCtrl" style="width:100%">
+	<div class="col-md-offset-1 col-md-10 mainContent">
+		<div style="height:40px;"></div>
+		<div>
+			<!-- <div style="height:40px;"></div> -->
+			<div class="inlineBlock" id="pageHeaderName" style="font-size:24px;font-weight:bold">ACTIVE USERS</div>
+			<div id="dropDownMenus" class="absoluteRightMargined">
+				<div style="height:40px;"></div>
+				<!-- <div class="relative chartDropDownTextDiv">
+						<a class="colorLighterGray bold imgHover dropdown-toggle " data-toggle="dropdown" >All Users</a>
+						<img border="0px" src="images/contentBarDownArrow_white.png" style="width: 16px; height: 16px;" class="analyticsImg">
+						<ul class="dropdown-menu nav ">
+                            <li><a ui-sref="user.register">All Users</a></li>
+                            <li><a ui-sref="user.register">IOS</a></li>
+                            <li><a ui-sref="user.register">Android</a></li>
+                        </ul>
+					
+				</div>
+				<div class="relative chartDropDownTextDiv">
+					<li>
+						<a class="colorLighterGray bold imgHover dropdown-toggle " data-toggle="dropdown" >All Version</a>
+						<img border="0px" src="images/contentBarDownArrow_white.png" style="width: 16px; height: 16px;" class="analyticsImg">
+						<ul class="dropdown-menu nav ">
+                            <li><a ui-sref="user.register">3.0.1</a></li>
+                            <li><a ui-sref="user.register">3.0.3</a></li>
+                            <li><a ui-sref="user.register">3.0.3</a></li>
+                        </ul>
+					</li>
+				</div> -->
+				<div class="relative chartDropDownTextDiv">
+					<li>
+						<a class="colorLighterGray bold imgHover dropdown-toggle " id="strSearchDate" data-toggle="dropdown">Date</a>
+						<img border="0px" src="images/contentBarDownArrow_white.png" style="width: 16px; height: 16px;" class="analyticsImg" data-toggle="dropdown">
+						<ul class="dropdown-menu nav ">
+                            <li class="rowInput"><input type="radio" name="group" value="1" id="radio1" ng-model="datepicker">
+                            	<label for="radio1" style="font-weight:normal;margin-bottom:0px">Last Week</label>
+                            </li>
+							<li class="rowInput"><input type="radio" name="group" value="2" id="radio2" ng-model="datepicker">
+								<label for="radio2" style="font-weight:normal;margin-bottom:0px">Last Month</label>
+							</li>
+							<li class="rowInput"><input type="radio" name="group" value="3" id="radio3" ng-model="datepicker">
+								<label for="radio3" style="font-weight:normal;margin-bottom:0px">Last Three Month</label>
+							</li>
+							<li class="rowInput"><input type="radio" name="group" value="4" id="radio4" ng-model="datepicker"> 
+								<label for="radio4" style="font-weight:normal;margin-bottom:0px">Last Year</label>
+							</li>
+							<li class="rowInput"><input type="radio" name="group" ng-model="datepicker" value="5" id="radio5">
+								<label for="radio5" style="font-weight:normal;margin-bottom:0px">Custom Time</label>
+								<div style="display:none" id="datepicker">
+									<div class="input-append date start_datetime">
+										<p>Start time:</p>
+								    	<input class="form-control" type="text"  readonly ng-model="start">
+								    	<span class="add-on"><i class="icon-th"></i></span>
+									</div>
+									<div class="input-append date end_datetime">
+										<p>End time:</p>
+								    	<input class="form-control" type="text"   ng-model="end">
+								    	<span class="add-on"><i class="icon-th"></i></span>
+									</div>
+									<button class="btn btn-sm btn-primary" ng-click="getRadioValue()">Update</button>
+								</div>
+							</li>
+							<li class="rowInput">
+								<!-- <button class="btn btn-sm btn-primary" ng-click="getRadioValue()">Update</button> -->
+							</li>
+                        </ul>
+					</li>
+				</div>
+			</div>
+		</div>
+
+		<div class="chartArea">
+			<div class="relative">
+				<div class="title relative">
+					<div class="inner">
+						<span class="sparkType">Active Users</span>
+					</div>
+					<div class="innerRight">
+							
+						<a title="Download CSV" target="_blank" class="imgHover colorMediumBlue" id="usersMainChartCsvLink">
+							<span ng-click="jsonToCSV()">Download CSV</span>
+							<img ng-click="jsonToCSV()" border="0px" src="images/csv.gif">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="borderChart relative" style="margin-bottom: 0px;">
+				<div class="absoluteRightMargined colorBlack zoomDiv" style="display: block;">Zoom: &nbsp;
+					<div class="inlineBlock linkHolder">
+						<a class="colorBlack hover daysZoom" ng-click="setType(1)">days</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover weeksZoom" ng-click="setType(4)">weeks</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover monthsZoom" ng-click="setType(5)">months</a>
+					</div>
+				</div>
+				<div id="chart_div1">
+				</div>
+			</div>
+		</div>
+		<div class="chartArea">
+			<div class="relative">
+				<div class="title relative">
+					<div class="inner">
+						<span class="sparkType">Spark Charts</span>
+					</div>
+				</div>
+			</div>
+			<div class="borderChart relative" style="margin-bottom: 0px;">
+				<div class="absoluteRightMargined colorBlack zoomDiv" style="display: block;">Zoom: &nbsp;
+					<div class="inlineBlock linkHolder">
+						<a class="colorBlack hover daysZoom" ng-click="sparkDays()">days</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover weeksZoom" ng-click="sparkWeeks()">weeks</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover monthsZoom" ng-click="sparkMonths()">months</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-3 col-md-3">
+						<p id="active">0</p>
+						 Active Users
+					</div>
+					<div class=" col-md-3">
+						<p id="avg_active">0</p>
+						 Avg.Active Users
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="chartArea">
+			<div class="relative">
+				<div class="title relative">
+					<div class="inner">
+						<span class="sparkType">Detaild View</span>
+					</div>
+					<div class="innerRight">
+							
+						<a title="Download CSV" target="_blank" class="imgHover colorMediumBlue" id="usersMainChartCsvLink">
+							<span ng-click="jsonToCSV()">Download CSV</span>
+							<img ng-click="jsonToCSV()" border="0px" src="images/csv.gif">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="borderChart relative" style="margin-bottom: 0px;">
+				<div class="absoluteRightMargined colorBlack zoomDiv" style="display: block;">Zoom: &nbsp;
+					<div class="inlineBlock linkHolder">
+						<a class="colorBlack hover daysZoom" ng-click="setType(1)">days</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover weeksZoom" ng-click="setType(4)">weeks</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover monthsZoom" ng-click="setType(5)">months</a>
+					</div>
+				</div>
+				<div id="table_div">
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="chartArea">
+			<div class="relative">
+				<div class="title relative">
+					<div class="inner">
+						<span class="sparkType">Active Users Map</span>
+					</div>
+					<div class="innerRight">	
+						<a title="Download CSV" target="_blank" class="imgHover colorMediumBlue" id="usersMainChartCsvLink">
+							<span ng-click="jsonToExcelCountry()">Download CSV</span>
+							<img ng-click="jsonToExcelCountry()" border="0px" src="images/csv.gif">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="borderChart relative" style="margin-bottom: 0px;">
+				<div class="absoluteRightMargined colorBlack zoomDiv" style="display: block;">Zoom: &nbsp;
+					<div class="inlineBlock linkHolder">
+						<a class="colorBlack hover daysZoom" key="daysZoom">days</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover weeksZoom" key="weeksZoom">weeks</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover monthsZoom" key="monthsZoom">months</a>
+					</div>
+				</div>
+				<div id="chart_div2">
+				</div>
+			</div>
+		</div> -->
+
+	</div>
+</div>
+<script type="text/javascript">
+    $(".start_datetime").datetimepicker({
+        format: "yyyy mm dd",
+        autoclose: true,
+        todayBtn: true,
+        minView:2,
+        viewSelect: 1,
+		viewSelect:'decade',
+    });
+
+    $(".end_datetime").datetimepicker({
+        format: "yyyy mm dd",
+        autoclose: true,
+        todayBtn: true,
+        minView:2,
+        viewSelect: 1,
+		viewSelect:'decade',
+    });
+</script> 

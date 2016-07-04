@@ -1,0 +1,108 @@
+<div class="row" ng-controller="summaryCtrl" style="width:100%">
+	<div class="col-md-offset-1 col-md-10 mainContent">
+		<div class="chartArea">
+			<div class="relative">
+				<div class="title relative">
+					<div class="inner">
+						<span class="sparkType">Spark Charts</span>
+					</div>
+				</div>
+			</div>
+			<div class="borderChart relative" style="margin-bottom: 0px;">
+				<div class="row">
+					<div class="col-md-offset-3 col-md-3">
+						<p id="totalUser">0</p>
+						 All Users
+					</div>
+					<div class=" col-md-3">
+						<p id="activeUser">0</p>
+						Active Users yesterday
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-3 col-md-3">
+						<p id="newUser">0</p>
+						New Users yesterday
+					</div>
+					<div class=" col-md-3">
+						<p id="order">0</p>
+						Orders yesterdat
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="chartArea">
+					<div class="relative">
+						<div class="title relative">
+							<div class="inner">
+								<span class="sparkType">Active Users</span>
+							</div>
+							<div class="innerRight">
+								<a title="Download CSV" target="_blank" class="imgHover colorMediumBlue" id="usersMainChartCsvLink">
+									<span ng-click="jsonToExcelActiveUser()">Download CSV</span>
+									<img  ng-click="jsonToExcelActiveUser()" border="0px" src="images/csv.gif">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="borderChart relative" style="margin-bottom: 0px;">
+						<div id="chart_active">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="chartArea">
+					<div class="relative">
+						<div class="title relative">
+							<div class="inner">
+								<span class="sparkType">New Users</span>
+							</div>
+							<div class="innerRight">
+								<a title="Download CSV" target="_blank" class="imgHover colorMediumBlue" id="usersMainChartCsvLink">
+									<span ng-click="jsonToExcelNewUser()">Download CSV</span>
+									<img ng-click="jsonToExcelNewUser()" border="0px" src="images/csv.gif">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="borderChart relative" style="margin-bottom: 0px;">
+						<div id="chart_new">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="chartArea">
+			<div class="relative">
+				<div class="title relative">
+					<div class="inner">
+						<span class="sparkType">Active Users Map</span>
+					</div>
+					<div class="innerRight">	
+						<a title="Download CSV" target="_blank" class="imgHover colorMediumBlue" id="usersMainChartCsvLink">
+							<span ng-click="jsonToExcelCountry()">Download CSV</span>
+							<img ng-click="jsonToExcelCountry()" border="0px" src="images/csv.gif">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="borderChart relative" style="margin-bottom: 0px;">
+				<div class="absoluteRightMargined colorBlack zoomDiv" style="display: block;">Zoom: &nbsp;
+					<div class="inlineBlock linkHolder">
+						<a class="colorBlack hover daysZoom" key="daysZoom">days</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover weeksZoom" key="weeksZoom">weeks</a>
+						<span class="linksSeparator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+						<a class="colorBlack hover monthsZoom" key="monthsZoom">months</a>
+					</div>
+				</div>
+				<div id="chart_div2">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
