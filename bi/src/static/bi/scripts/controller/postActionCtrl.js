@@ -85,7 +85,7 @@ function postActionCtrl($scope, $http) {
 	$scope.getOrderCount = function(startDate, endDate) {
 		var req = {
 			method:"GET",
-			url : API_URI_ENDPOINT + "/posts?startDate=" + startDate + "&endDate=" + endDate,
+			url : API_URI_ENDPOINT + "/posts?startDate=" + startDate + "&endDate=" + endDate + "&query=country",
 		}
 		$http(req)
 		.success(function(response){

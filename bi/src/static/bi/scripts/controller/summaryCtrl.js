@@ -1,4 +1,4 @@
-function summaryCtrl($scope, apiService, $http) {
+function summaryCtrl($scope, $http) {
 
 	$scope.initSearch = function() {
 	 	
@@ -46,7 +46,7 @@ function summaryCtrl($scope, apiService, $http) {
 	$scope.getNewUserInfo = function(startDate, endDate, type) {
 		var req = {
 	      method: "GET",
-	      url: API_URI_ENDPOINT + "/stats?startDate=" + startDate + "&endDate=" + endDate + "&type=" + type,
+	      url: API_URI_ENDPOINT + "/stats?startDate=" + startDate + "&endDate=" + endDate + "&type=" + type + "&query=user",
 	    }
 	    $http(req)
 	    .success(function(response){
@@ -173,7 +173,7 @@ function summaryCtrl($scope, apiService, $http) {
   	$scope.getActiveUsersCountry = function() {
 	      	var req = {
 	      		method : "GET",
-	      		url : API_URI_ENDPOINT + "/stats/user/country"
+	      		url : API_URI_ENDPOINT + "/stats?query=country"
 	      	}
 	      	$http(req)
 	      	.success(function(response) {

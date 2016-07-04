@@ -111,7 +111,7 @@ function activeUserCtrl($scope, $http) {
 	$scope.getUserActive = function(startDate, endDate, type) {
 		var req = {
 			method:"GET",
-			url : API_URI_ENDPOINT + "/stats?startDate=" + startDate + "&endDate=" + endDate + "&type=" + type,
+			url : API_URI_ENDPOINT + "/stats?startDate=" + startDate + "&endDate=" + endDate + "&type=" + type + "&query=user",
 		}
 		var space = type;
 		$http(req)
