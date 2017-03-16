@@ -1,5 +1,11 @@
 package com.mode.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Created by kang on 2016/6/30.
  */
@@ -67,5 +73,43 @@ public class Post {
 
     public void setRelatedItem(Integer relatedItem) {
         this.relatedItem = relatedItem;
+    }
+
+    public static void main(String[] args) {
+
+        List<Post> list = new ArrayList<Post>();
+
+        Post post = new Post();
+        post.setId(1);
+        post.setTitle("t1");
+        post.setComments(1);
+        post.setFavors(1);
+        post.setShares(1);
+        post.setViews(1);
+        list.add(post);
+
+        post = new Post();
+        post.setId(2);
+        post.setTitle("t2");
+        post.setComments(2);
+        post.setFavors(2);
+        post.setShares(2);
+        post.setViews(2);
+        list.add(post);
+
+        post = new Post();
+        post.setId(3);
+        post.setTitle("t2");
+        post.setComments(3);
+        post.setFavors(3);
+        post.setShares(3);
+        post.setViews(3);
+        list.add(post);
+
+        Stream stream = list.stream().filter(p -> "t2".equals(p.getTitle()));
+        System.out.println(stream.count());
+        List<Post> newList = list.stream().filter(p -> "t2".equals(p.getTitle())).collect(Collectors.toList());
+
+        System.out.println(newList.size());
     }
 }

@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.3.5.RELEASE'
+        springBootVersion = '1.4.0.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -18,9 +18,9 @@ subprojects {
     apply plugin: 'eclipse'
     apply plugin: 'idea'
 
-    archivesBaseName = 'data-platform'
+    //archivesBaseName = 'data-platform'
     group = 'com.mode'
-    version = '3.0'
+    //version = '3.0'
 
     // Global settings
     ext {
@@ -29,7 +29,7 @@ subprojects {
         ossVersion = '2.2.3'
         braintreeVersion = '2.62.0'
         springFoxVersion = '2.4.0'
-        jsonpathVersion = '0.8.1'
+        jsonpathVersion = '2.2.0'
         mybatisVersion = '3.3.0'
         mybatisSpringVersion = '1.2.3'
         druidVersion = '1.0.16'
@@ -48,14 +48,15 @@ subprojects {
 
     repositories {
         mavenLocal()
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenCentral()
         jcenter()
     }
 
     // Settings for the compile task
     tasks.withType(JavaCompile) {
-        sourceCompatibility = '1.7'
-        targetCompatibility = '1.7'
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
         options.encoding = 'UTF-8'
         options.debug = true
         options.compilerArgs << "-Xlint:unchecked"
@@ -63,7 +64,8 @@ subprojects {
     }
 
     // Apply 'war' plugin for all war projects
-    configure([project(":bi")]) {
+    configure([project(":bi"), project(":web"), project(":mytest"), project(":logistics"),
+               project(":ga"), project(":logistics-17track")]) {
 
         apply plugin: 'war'
     }
@@ -112,6 +114,12 @@ project(':core') {
         // Mybatis spring
         compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
 
+        compile('org.jasypt:jasypt:1.9.2')
+
+        compile ("org.jsoup:jsoup:1.10.2")
+
+        compile("com.google.guava:guava:20.0")
+
         // MySQL Java Driver
         runtime("mysql:mysql-connector-java")
     }
@@ -148,6 +156,179 @@ project(':bi') {
 //        testCompile('org.springframework.boot:spring-boot-starter-test')
 //        testCompile "com.jayway.jsonpath:json-path:${jsonpathVersion}"
 //        testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
+    }
+}
+
+
+project(':web') {
+
+    war {
+        classifier = 'web'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        // Spring Boot MVC
+        compile("org.springframework.boot:spring-boot-starter-web")
+        // Spring Boot jdbc
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+
+//        compile("org.springframework.boot:spring-boot-starter-aop")
+        // Mybatis
+        compile("org.mybatis:mybatis:${mybatisVersion}")
+        compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
+        // Spring Boot velocity
+        compile("org.springframework.boot:spring-boot-starter-velocity")
+        // DevTools will automatically restart whenever files on the classpath change.
+        // In Eclipse, saving a modified file will cause the classpath to be updated and trigger
+        // a restart.
+        // In IntelliJ IDEA, building the project (Build → Make Project) will have the same effect.
+        compile("org.springframework.boot:spring-boot-devtools")
+        // Alibaba druid
+        compile("com.alibaba:druid:${druidVersion}")
+        // Runtime Java EE Container - Tomcat
+        compile("org.springframework.boot:spring-boot-starter-tomcat")
+        // Send email using mailgun
+//        compile ("net.sargue:mailgun:${sargueVersion}")
+
+        // MySQL Java Driver
+        runtime("mysql:mysql-connector-java")
+
+    }
+}
+
+
+project(':mytest') {
+
+    war {
+        classifier = 'mytest'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        // Spring Boot MVC
+        compile("org.springframework.boot:spring-boot-starter-web")
+        // Spring Boot jdbc
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        // Mybatis
+        compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+        // DevTools will automatically restart whenever files on the classpath change.
+        // In Eclipse, saving a modified file will cause the classpath to be updated and trigger
+        // a restart.
+        // In IntelliJ IDEA, building the project (Build → Make Project) will have the same effect.
+        compile("org.springframework.boot:spring-boot-devtools")
+        // Alibaba druid
+        //compile("com.alibaba:druid:${druidVersion}")
+        // Runtime Java EE Container - Tomcat
+        compile("org.springframework.boot:spring-boot-starter-tomcat")
+
+        // MySQL Java Driver
+        runtime("mysql:mysql-connector-java")
+
+    }
+}
+
+project(':logistics') {
+
+    war {
+        //classifier = 'logistics'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        // Spring Boot MVC
+        compile("org.springframework.boot:spring-boot-starter-web")
+        // Spring Boot jdbc
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        // Mybatis
+        compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+        // DevTools will automatically restart whenever files on the classpath change.
+        // In Eclipse, saving a modified file will cause the classpath to be updated and trigger
+        // a restart.
+        // In IntelliJ IDEA, building the project (Build → Make Project) will have the same effect.
+        compile("org.springframework.boot:spring-boot-devtools")
+        // Alibaba druid
+        //compile("com.alibaba:druid:${druidVersion}")
+        // Runtime Java EE Container - Tomcat
+        compile("org.springframework.boot:spring-boot-starter-tomcat")
+
+        compile("org.apache.httpcomponents:httpclient:4.5.2")
+
+        compile("org.jsoup:jsoup:1.10.1")
+
+        //compile ("com.jayway.jsonpath:json-path:${jsonpathVersion}")
+
+        // MySQL Java Driver
+        runtime("mysql:mysql-connector-java")
+
+    }
+}
+
+project(':ga') {
+
+    war {
+        //classifier = 'ga'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        // Spring Boot MVC
+        compile("org.springframework.boot:spring-boot-starter-web")
+        // Spring Boot jdbc
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        // Mybatis
+        compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+        // DevTools will automatically restart whenever files on the classpath change.
+        // In Eclipse, saving a modified file will cause the classpath to be updated and trigger
+        // a restart.
+        // In IntelliJ IDEA, building the project (Build → Make Project) will have the same effect.
+        compile("org.springframework.boot:spring-boot-devtools")
+        // Alibaba druid
+        //compile("com.alibaba:druid:${druidVersion}")
+        // Runtime Java EE Container - Tomcat
+        compile("org.springframework.boot:spring-boot-starter-tomcat")
+
+        compile("org.apache.httpcomponents:httpclient:4.5.2")
+
+        // MySQL Java Driver
+        runtime("mysql:mysql-connector-java")
+
+    }
+}
+
+project(':logistics-17track') {
+
+    war {
+        //classifier = 'logistics'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        // Spring Boot MVC
+        compile("org.springframework.boot:spring-boot-starter-web")
+        // Spring Boot jdbc
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        // Mybatis
+        compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+        // DevTools will automatically restart whenever files on the classpath change.
+        // In Eclipse, saving a modified file will cause the classpath to be updated and trigger
+        // a restart.
+        // In IntelliJ IDEA, building the project (Build → Make Project) will have the same effect.
+        compile("org.springframework.boot:spring-boot-devtools")
+        // Alibaba druid
+        //compile("com.alibaba:druid:${druidVersion}")
+        // Runtime Java EE Container - Tomcat
+        compile("org.springframework.boot:spring-boot-starter-tomcat")
+
+        compile("org.apache.httpcomponents:httpclient:4.5.2")
+
+        compile("org.jsoup:jsoup:1.10.1")
+
+        //compile ("com.jayway.jsonpath:json-path:${jsonpathVersion}")
+
+        // MySQL Java Driver
+        runtime("mysql:mysql-connector-java")
+
     }
 }
 

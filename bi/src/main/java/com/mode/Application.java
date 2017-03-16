@@ -1,11 +1,12 @@
 package com.mode;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import springfox.documentation.builders.PathSelectors;
@@ -60,4 +61,6 @@ public class Application extends SpringBootServletInitializer {
                 "http://www.modeapplication.com"); // licenseUrl
         return apiInfo;
     }
+
+    
 }

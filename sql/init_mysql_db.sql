@@ -137,6 +137,23 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
+-- -----------------------------------------------------
+-- Table `mode_bi`.`md_account_daily`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mode_bi`.`md_account_daily` ;
+
+CREATE TABLE IF NOT EXISTS `mode_bi`.`md_user_account_daily` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(13) NULL DEFAULT NULL COMMENT 'User id.',
+  `date` INT(8) NULL DEFAULT NULL COMMENT 'Daily date: 20160601, 20160602...',
+  PRIMARY KEY (`id`),
+  INDEX `date_idx` (`date` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -1,7 +1,8 @@
 /**
  * Declare constants here.
  */
-var API_URI_ENDPOINT = "http://localhost:8080/data-platform-3.0-bi";
+//var API_URI_ENDPOINT = "http://localhost:8080/data-platform-3.0-bi";
+var API_URI_ENDPOINT = "http://www.whatsmode.com/bi";
 //var API_URI_ENDPOINT = "http://192.168.2.110:8080/data-platform-3.0-bi";
 
 /**

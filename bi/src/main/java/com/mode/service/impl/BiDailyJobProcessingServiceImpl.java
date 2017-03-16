@@ -335,12 +335,24 @@ public class BiDailyJobProcessingServiceImpl implements BiDailyJobProcessingServ
 
     }
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        Pattern p = Pattern.compile("(\\w+)(\\w+)");
 //        Matcher matcher = p.matcher("onecattwocatsintheyard");
 //        System.out.println(matcher.groupCount());
 //        while(matcher.find()) {
 //            System.out.println(matcher.group(2));
 //        }
-//    }
+
+
+        java.text.DecimalFormat   df=new   java.text.DecimalFormat("##.##");
+        float d = (float)  0 / 3940;
+
+        System.out.println(String.format("%.2f%%", d));
+
+        System.out.println(101 * 100 / 3980);
+        System.out.println(d);
+        System.out.println(df.format(d));
+
+
+    }
 }
